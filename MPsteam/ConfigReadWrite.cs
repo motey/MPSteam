@@ -13,7 +13,10 @@ namespace MpSteam
     {
         List<ConfigItem> configItems = new List<ConfigItem>();
 
-        //Construktor
+        /// <summary>
+        /// Constructor: Reads the Config File from a specified Path and transfers the Items to a List.
+        /// </summary>
+        /// <param name="name">Path to the config file</param>
         public ConfigReadWrite(string path)
         {
             if (this.CheckFile(path)) //Check if File exists (TODO:and Validate XML)
@@ -22,7 +25,11 @@ namespace MpSteam
             { this.CreateFile(path); } //Create Config File
         }
 
-
+        /// <summary>
+        /// Write a ConfigItem in List "configItems". If 'name' exists in the List, the value will be overwriten. If not a new configItem will be created
+        /// </summary>
+        /// <param name="name">Name of the configItem</param>
+        /// <param name="value">Value of the configItem</param>
         public void WriteConfigItem(string name, string value)
         {
             bool exists = false;
@@ -43,6 +50,12 @@ namespace MpSteam
             }
         }
 
+        /// <summary>
+        /// Reads a specified ConfigItem in List "configItems".
+        /// </summary>
+        /// <param name="name">Name of the configItem</param>
+        /// <returns>The Value of the Config Item as String.
+        /// </returns>
         public string ReadConfigItem(string name)
         {
             string value = "null";
@@ -50,12 +63,16 @@ namespace MpSteam
             {
                 if (ci.Name == name)
                 {
-                    value = ci.Value.ToString(); //TODO Test auf array oder string
+                    value = ci.Value.ToString();
                 }
             });
             return value;
         }
 
+        /// <summary>
+        /// Saves the configItems List to the specified Path. When there is a existing config File values will be synced. The config file will be written in XML.
+        /// </summary>
+        /// <param name="path">Path to config file</param>
         public void SaveConfig(string path)
         {
             if (!this.CheckFile(path)) //Check if File exists (TODO:and Validate XML)
