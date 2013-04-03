@@ -11,7 +11,7 @@ namespace MpSteam
 {
     public partial class configWindow : Form
     {
-        ConfigReadWrite config = new ConfigReadWrite(@"D:\config.xml"); //TODO: PATH %PROGRAMDATA%/TeamMediaportal ..blabla
+        ConfigReadWrite config = new ConfigReadWrite();
         public configWindow()
         {
             InitializeComponent();
@@ -96,7 +96,7 @@ namespace MpSteam
 
             config.WriteConfigItem("StartScriptPath", tB_script.Text);
             config.WriteConfigItem("SteamPath", tB_steam.Text);
-            config.SaveConfig(@"D:\MPTEST\config.xml"); //TODO: PATH %PROGRAMDATA%/TeamMediaportal ..blabla
+            config.SaveConfig(); 
             this.Close();
         }
 

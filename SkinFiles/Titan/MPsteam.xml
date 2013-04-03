@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<window>
+    <id>8465</id>
+    <defaultcontrol>2</defaultcontrol>
+    <allowoverlay>yes</allowoverlay>
+    <controls>
+        <control>
+            <id>0</id>
+            <description>DEFAULT BACKGROUND</description>
+            <type>image</type>
+            <posX>0</posX>
+            <posY>0</posY>
+            <width>1920</width>
+            <height>1080</height>
+            <texture>background.png</texture>
+            <shouldCache>true</shouldCache>
+        </control>
+        <control>
+            <description>menu-frame</description>
+            <type>image</type>
+            <posX>17</posX>
+            <posY>464</posY>
+            <texture>panel_filmstrip.png</texture>
+        </control>
+        <control>
+            <description>steam-logo</description>
+            <type>image</type>
+            <posX>88</posX>
+            <posY>528</posY>
+            <width>406</width>
+            <height>414</height>
+            <texture>Steam-logo.png</texture>
+        </control>
+        <control>
+            <id>2</id>
+            <description>ButtonStartAgain</description>
+            <type>button</type>
+            <onleft>2</onleft>
+            <onright>2</onright>
+            <onup>2</onup>
+            <ondown>3</ondown>
+            <posX>1135</posX>
+            <posY>533</posY>
+            <width>720</width>
+            <height>100</height>
+            <font>TitanLight16</font>
+            <label>Start Steam Again</label>
+            <textalign>CENTER</textalign>
+        </control>
+        <control>
+            <id>3</id>
+            <description>ButtonSetFocus</description>
+            <type>button</type>
+            <onleft>2</onleft>
+            <onright>2</onright>
+            <onup>2</onup>
+            <ondown>2</ondown>
+            <posX>1136</posX>
+            <posY>647</posY>
+            <width>720</width>
+            <height>100</height>
+            <font>TitanLight16</font>
+            <label>Set Windows Focus on Steam</label>
+            <textalign>CENTER</textalign>
+        </control>
+        <control>
+            <id>1</id>
+            <description>Steam Actions</description>
+            <type>label</type>
+            <posX>999</posX>
+            <posY>993</posY>
+            <font>TitanLight16</font>
+            <textcolor>ff000000</textcolor>
+            <align>CENTER</align>
+            <label>Valve Steam</label>
+        </control>
+    </controls>
+</window>

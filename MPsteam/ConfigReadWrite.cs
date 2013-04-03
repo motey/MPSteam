@@ -17,12 +17,28 @@ namespace MpSteam
         /// Constructor: Reads the Config File from a specified Path and transfers the Items to a List.
         /// </summary>
         /// <param name="name">Path to the config file</param>
-        public ConfigReadWrite(string path)
+        public ConfigReadWrite()
         {
+            string path = GetConfigPath();
             if (this.CheckFile(path)) //Check if File exists (TODO:and Validate XML)
             { this.ReadConfigFile(path); } //Read existing Config in list "configItems"
             else
             { this.CreateFile(path); } //Create Config File
+        }
+
+        private string GetConfigPath()
+        {
+            string result = "";
+            if (Environment.OSVersion.Version.Major > 4 && Environment.OSVersion.Version.Minor > 1)
+            {
+                        result = Path.Combine(Environment.GetEnvironmentVariable("PUBLIC"), @"Team MediaPortal\MediaPortal\MPsteam.xml");
+            }
+                    else
+            {
+                        result = Path.Combine(Environment.GetEnvironmentVariable("ALLUSERSPROFILE"), @"Team MediaPortal\MediaPortal\MPsteam.xml");
+            }
+            return result;
+
         }
 
         /// <summary>
@@ -73,8 +89,9 @@ namespace MpSteam
         /// Saves the configItems List to the specified Path. When there is a existing config File values will be synced. The config file will be written in XML.
         /// </summary>
         /// <param name="path">Path to config file</param>
-        public void SaveConfig(string path)
+        public void SaveConfig()
         {
+            string path = GetConfigPath();
             if (!this.CheckFile(path)) //Check if File exists (TODO:and Validate XML)
             { this.CreateFile(path); } //Create File if not
 
@@ -181,7 +198,7 @@ namespace MpSteam
             }
         }
 
-
+        
 
         private class ConfigItem
         {

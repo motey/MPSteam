@@ -22,10 +22,11 @@ namespace MpSteam
     {
         [SkinControlAttribute(2)] protected GUIButtonControl buttonOne=null;
         [SkinControlAttribute(3)] protected GUIButtonControl buttonTwo=null;
-        ConfigReadWrite config = new ConfigReadWrite(@"D:\config.xml"); //TODO: PATH %PROGRAMDATA%/TeamMediaportal ..blabla
+   
+        ConfigReadWrite config = new ConfigReadWrite();
         public Class1()
         {
-
+            
         }
 
         #region ISetupForm Members
@@ -51,7 +52,9 @@ namespace MpSteam
         // show the setup dialog
         public void ShowPlugin()
         {
-            MessageBox.Show("Nothing to configure, this is just an example");
+            //configWindow cw = new configWindow();
+            //cw.Show();
+            MessageBox.Show("TEST");
         }
 
         // Indicates whether plugin can be enabled/disabled
