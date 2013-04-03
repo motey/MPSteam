@@ -34,13 +34,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Utils">
-      <HintPath>D:\Team MediaPortal\MediaPortal\Common.Utils.dll</HintPath>
+      <HintPath>..\Import\Common.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Core">
-      <HintPath>D:\Team MediaPortal\MediaPortal\Core.dll</HintPath>
+      <HintPath>..\Import\Core.dll</HintPath>
     </Reference>
     <Reference Include="Dialogs">
-      <HintPath>D:\Team MediaPortal\MediaPortal\Plugins\Windows\Dialogs.dll</HintPath>
+      <HintPath>..\Import\Dialogs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -48,12 +48,10 @@
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
     <Compile Include="ConfigReadWrite.cs" />
     <Compile Include="configWindow.cs">
       <SubType>Form</SubType>
@@ -61,6 +59,8 @@
     <Compile Include="configWindow.Designer.cs">
       <DependentUpon>configWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="FocusChanger.cs" />
+    <Compile Include="PluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
