@@ -305,16 +305,12 @@ namespace MpSteam
 
       //TODO: Move to seperate class
       private string GetConfigurationPath()
-      {
-         return @"c:\temp\MPsteam.xml";
-         /*if (Environment.OSVersion.Version.Major > 4 && Environment.OSVersion.Version.Minor > 1)
+      {       
+         //TODO: Test on XP, Where are other MP skins, configs installed on XP?
+         //if (Environment.OSVersion.Version.Major > 4 && Environment.OSVersion.Version.Minor > 1)
          {
-            return Path.Combine(Environment.GetEnvironmentVariable("PUBLIC"), @"Team MediaPortal\MediaPortal\MPsteam.xml");
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"Team MediaPortal\MediaPortal\MPsteam.xml");
          }
-         else
-         {
-            return Path.Combine(Environment.GetEnvironmentVariable("ALLUSERSPROFILE"), @"Team MediaPortal\MediaPortal\MPsteam.xml");
-         }*/
       }
 
       #region private members
