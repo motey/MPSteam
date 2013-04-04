@@ -42,6 +42,8 @@
     <Reference Include="Dialogs">
       <HintPath>..\Import\Dialogs.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
@@ -50,23 +52,37 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigReadWrite.cs" />
-    <Compile Include="configWindow.cs">
+    <Compile Include="View\configWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="configWindow.Designer.cs">
+    <Compile Include="View\configWindow.Designer.cs">
       <DependentUpon>configWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="FocusChanger.cs" />
+    <Compile Include="Helper\ViewModelBase.cs" />
+    <Compile Include="Helper\XMLSerializer.cs" />
+    <Compile Include="Model\ConfigurationModel.cs" />
+    <Compile Include="Helper\FocusChanger.cs" />
     <Compile Include="PluginBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\ConfigurationVM.cs" />
+    <Compile Include="View\ConfigurationView.xaml.cs">
+      <DependentUpon>ConfigurationView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="configWindow.resx">
+    <EmbeddedResource Include="View\configWindow.resx">
       <DependentUpon>configWindow.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Page Include="View\ConfigurationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

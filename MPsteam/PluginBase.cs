@@ -32,7 +32,7 @@ namespace MpSteam
       /// <returns>Description string</returns>
       public string Description()
       {
-         return "This tiny Plugin provides a menu item to start Steam in Big Picture Mode.";
+         return "This plugin provides a menu item to start Steam in Big Picture Mode.";
       }
 
       /// <summary>
@@ -49,7 +49,17 @@ namespace MpSteam
       /// </summary>
       public void ShowPlugin()
       {
-         MessageBox.Show("Test");
+         LoadConfiguration();
+         configWindow wnd = new configWindow(_configuration.Clone() as ConfigurationVM);
+         wnd.ShowDialog();
+
+         if (wnd.DialogResult == DialogResult.OK)
+         {
+            //Save changes
+            _configuration = wnd.GetResult();
+            SaveConfiguration();
+         }
+         
       }
 
       /// <summary>
@@ -101,7 +111,7 @@ namespace MpSteam
       /// false : plugin does not need it's own button on home</returns>
       public bool GetHome(out string strButtonText, out string strButtonImage, out string strButtonImageFocus, out string strPictureImage)
       {
-         strButtonText = "Start Steam";
+         strButtonText = "Steam";
          strButtonImage = String.Empty;
          strButtonImageFocus = String.Empty;
          strPictureImage = String.Empty;
@@ -130,6 +140,7 @@ namespace MpSteam
       /// <returns>True if successfull, else false</returns>
       public override bool Init()
       {
+         LoadConfiguration();      
          return Load(GUIGraphicsContext.Skin + @"\MPsteam.xml");
       }
 
@@ -193,9 +204,9 @@ namespace MpSteam
       /// <returns>Path to steam executable</returns>
       private string GetSteamExePath()
       {
-         if (_configWriter.ReadConfigItem("ManualSteamPath") == "true")
+         if (_configuration.OverrideSteamPath)
          {
-            return _configWriter.ReadConfigItem("SteamPath");
+            return _configuration.SteamPath;
          }
          else
          {
@@ -220,9 +231,9 @@ namespace MpSteam
       /// </summary>
       private void StartSteam()
       {
-         if (_configWriter.ReadConfigItem("StartScript") == "true")
+         if (_configuration.RunPreStartScript)
          {
-            string scriptPath = _configWriter.ReadConfigItem("StartScriptPath");
+            string scriptPath = _configuration.PreStartScriptPath;
             Process script = new Process();
             script.StartInfo.FileName = scriptPath;
             script.Start();
@@ -235,7 +246,7 @@ namespace MpSteam
             {
                Process steam = new Process();
                steam.StartInfo.FileName = steamapp;
-               if (_configWriter.ReadConfigItem("BigPictureMode") == "false")
+               if (!_configuration.StartInBigPicture)
                {
                   steam.StartInfo.Arguments = "";
                }
@@ -249,7 +260,7 @@ namespace MpSteam
             {
                Process steam = new Process();
                steam.StartInfo.FileName = steamapp;
-               if (_configWriter.ReadConfigItem("BigPictureMode") == "false")
+               if (!_configuration.StartInBigPicture)
                {
                   steam.StartInfo.Arguments = "";
                }
@@ -274,6 +285,38 @@ namespace MpSteam
          }
       }
 
+      //TODO: Move to seperate class
+      private void LoadConfiguration()
+      {
+	      string configPath = GetConfigurationPath();
+         if (File.Exists(configPath))
+         {
+            ConfigurationModel configurationModel = XMLSerializer.Load(configPath, typeof(ConfigurationModel)) as ConfigurationModel;
+            _configuration = new ConfigurationVM(configurationModel);
+         }
+      }
+
+      //TODO: Move to seperate class
+      private void SaveConfiguration()
+      {
+         string configPath = GetConfigurationPath();
+         XMLSerializer.Save(configPath, _configuration.Model);
+      }
+
+      //TODO: Move to seperate class
+      private string GetConfigurationPath()
+      {
+         return @"c:\temp\MPsteam.xml";
+         /*if (Environment.OSVersion.Version.Major > 4 && Environment.OSVersion.Version.Minor > 1)
+         {
+            return Path.Combine(Environment.GetEnvironmentVariable("PUBLIC"), @"Team MediaPortal\MediaPortal\MPsteam.xml");
+         }
+         else
+         {
+            return Path.Combine(Environment.GetEnvironmentVariable("ALLUSERSPROFILE"), @"Team MediaPortal\MediaPortal\MPsteam.xml");
+         }*/
+      }
+
       #region private members
 
       [SkinControlAttribute(2)]
@@ -282,7 +325,7 @@ namespace MpSteam
       protected GUIButtonControl _buttonFocus = null; 
 
       private const short _windowID = 8465;
-      private ConfigReadWrite _configWriter = new ConfigReadWrite(); 
+      private ConfigurationVM _configuration = new ConfigurationVM(new ConfigurationModel());
 
       #endregion    
    } 
