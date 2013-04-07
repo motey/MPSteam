@@ -306,7 +306,7 @@ Click Next to continue or Cancel to exit Setup.</Value>
     <Author>Tim Bleimehl, Jens Bühl</Author>
     <HomePage>https://github.com/motey/MPSteam</HomePage>
     <ForumPage>http://forum.team-mediaportal.com/threads/mpsteam-starting-valve-steam-in-big-picture-mode.114471/</ForumPage>
-    <UpdateUrl>https://raw.github.com/motey/MPSteam/master/setup/MPsteam_update.xml</UpdateUrl>
+    <UpdateUrl>https://raw.github.com/motey/MPSteam/master/Setup/MPsteam_update.xml</UpdateUrl>
     <Version>
       <Major>0</Major>
       <Minor>0</Minor>
@@ -316,7 +316,7 @@ Click Next to continue or Cancel to exit Setup.</Value>
     <ExtensionDescription>This tiny extention adds an entry for starting Valve Steam in Big Pictre Mode to the menu.</ExtensionDescription>
     <VersionDescription>-Added Config</VersionDescription>
     <DevelopmentStatus>Alpha</DevelopmentStatus>
-    <OnlineLocation>https://raw.github.com/motey/MPSteam/master/setup/MPsteam_0.0.2.1.mpe1</OnlineLocation>
+    <OnlineLocation>https://github.com/motey/MPSteam/raw/master/Setup/MPsteam_0.0.2.1.mpe1</OnlineLocation>
     <ReleaseDate>2013-04-02T23:15:38</ReleaseDate>
     <Tags>steam, external app</Tags>
     <Location>C:\Users\tim\Documents\GitHub\MPSteam\Setup\[Name]_[Version].mpe1</Location>
