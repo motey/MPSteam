@@ -3,10 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
-             Title="{Binding Title}"
-             d:DesignHeight="300" d:DesignWidth="300">
+             mc:Ignorable="d" d:DesignWidth="348"  d:DesignHeight="220.375"
+        MinWidth="340" 
+        Width="Auto"
+        MinHeight="220" 
+        Height="Auto" >
     <Grid>
-            
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <CheckBox IsChecked="{Binding StartInBigPicture}" Margin="5" Grid.Row="0">Start Steam in Big Picture mode</CheckBox>
+
+        <StackPanel Grid.Row="1">
+            <CheckBox IsChecked="{Binding RunPreStartScript}" Margin="5">Start script or executable before starting Steam</CheckBox>
+            <StackPanel  Orientation="Horizontal" IsEnabled="{Binding RunPreStartScript}">
+                <Label>Path:</Label>
+                <TextBox Text="{Binding PreStartScriptPath}" Margin="5" MinWidth="150"></TextBox>
+                <Button Margin="5" Width="20" Command="{Binding SelectScriptPathCommand}">...</Button>
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <CheckBox IsChecked="{Binding OverrideSteamPath}" Margin="5" >Set path to "steam.exe" manually</CheckBox>
+            <StackPanel Orientation="Horizontal" IsEnabled="{Binding OverrideSteamPath}">
+                <Label>Path:</Label>
+                <TextBox Text="{Binding SteamPath}" Margin="5" MinWidth="150"></TextBox>
+                <Button Margin="5" Width="20"  Command="{Binding SelectSteamPathCommand}">...</Button>
+            </StackPanel>
+        </StackPanel>
+        
+        <StackPanel Margin="5" Grid.Row="3" Orientation="Horizontal" FlowDirection="RightToLeft">
+            <Button Margin="5,0,5,5" Width="60" Height="20" VerticalAlignment="Bottom" IsDefault="True">Save</Button>
+            <Button Margin="5,0,5,5" Width="60" Height="20" VerticalAlignment="Bottom" IsCancel="True">Cancel</Button>         
+        </StackPanel>
     </Grid>
 </Window>

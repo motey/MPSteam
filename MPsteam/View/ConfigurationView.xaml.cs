@@ -15,13 +15,12 @@ using System.Windows.Shapes;
 namespace MpSteam
 {
    /// <summary>
-   /// Interaction logic for ConfigurationView.xaml
+   /// Interaktionslogik für ConfigurationView.xaml
    /// </summary>
    public partial class ConfigurationView : Window
    {
-      public ConfigurationView(ConfigurationVM viewModel)
+      public ConfigurationView()
       {
-         this.DataContext = viewModel;
          InitializeComponent();
       }
    }
