@@ -204,10 +204,10 @@ namespace MpSteam
       /// <returns>Path to steam executable</returns>
       private string GetSteamExePath()
       {
-         if (_configuration.OverrideSteamPath)
-         {
+        if (_configuration.OverrideSteamPath && File.Exists(_configuration.SteamPath))
+        {             
             return _configuration.SteamPath;
-         }
+        }
          else
          {
             RegistryKey regKey = Registry.CurrentUser;
@@ -231,7 +231,7 @@ namespace MpSteam
       /// </summary>
       private void StartSteam()
       {
-         if (_configuration.RunPreStartScript)
+          if (_configuration.RunPreStartScript && File.Exists(_configuration.PreStartScriptPath))
          {
             string scriptPath = _configuration.PreStartScriptPath;
             Process script = new Process();

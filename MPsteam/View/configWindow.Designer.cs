@@ -148,6 +148,7 @@
             this.cB_SetSteamActivated.TabIndex = 9;
             this.cB_SetSteamActivated.Text = "Activate";
             this.cB_SetSteamActivated.UseVisualStyleBackColor = true;
+            this.cB_SetSteamActivated.CheckedChanged += new System.EventHandler(this.cB_SetSteamActivated_CheckedChanged);
             // 
             // b_SearchSteam
             // 

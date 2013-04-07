@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.IO;
 
 namespace MpSteam
 {
@@ -28,7 +29,7 @@ namespace MpSteam
       private void b_searchScript_Click(object sender, EventArgs e)
       {
          OpenFileDialog openFileDialog_script = new OpenFileDialog();
-         openFileDialog_script.Filter = "Executable|*.exe;*.bat;*.vb";
+         openFileDialog_script.Filter = "Executable|*.exe;*.bat;*.vbs";
          openFileDialog_script.Title = "Select an executable File";
          if (openFileDialog_script.ShowDialog() == DialogResult.OK)
          {
@@ -72,5 +73,29 @@ namespace MpSteam
       }
 
       ConfigurationVM _configuration = new ConfigurationVM(new ConfigurationModel());
+
+      private void cB_StartScriptActivated_CheckedChanged(object sender, EventArgs e)
+      {
+          if (cB_StartScriptActivated.Checked)
+          {
+              if (tB_script.Text == "" || !File.Exists(tB_script.Text))
+              {
+                  MessageBox.Show("Please specify a valid Path!");
+                  cB_StartScriptActivated.Checked = false;
+              }
+          }
+      }
+
+      private void cB_SetSteamActivated_CheckedChanged(object sender, EventArgs e)
+      {
+          if (cB_SetSteamActivated.Checked)
+          {
+              if (tB_steam.Text == "" || !File.Exists(tB_steam.Text))
+              {
+                  MessageBox.Show("Please specify a valid Path!");
+                  cB_SetSteamActivated.Checked = false;
+              }
+          }
+      }
    }
 }

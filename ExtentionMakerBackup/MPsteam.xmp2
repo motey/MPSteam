@@ -13,9 +13,9 @@
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\bin\Debug\MPsteam.dll</LocalFileName>
+              <LocalFileName>..\MPsteam\bin\Debug\MPsteam.dll</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{67206865-ae28-48a4-9ab4-f0d0d04ddb6f}-MPsteam.dll</ZipFileName>
-              <DestinationFilename>%Base%\MPsteam.dll</DestinationFilename>
+              <DestinationFilename>%Plugins%\Windows\MPsteam.dll</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -29,15 +29,15 @@
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>C:\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\MPsteam.xml</LocalFileName>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\MPsteam.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{26f72077-f54c-40e1-a586-fb351551319d}-MPsteam.xml</ZipFileName>
               <DestinationFilename>%Skin%\StreamedMP\MPsteam.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>C:\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\Media\MPSteam\Steam-logo.png</LocalFileName>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\Media\MPSteam\Steam-logo.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{e9f15d54-0a5b-4651-8ae2-2114c87f8762}-Steam-logo.png</ZipFileName>
               <DestinationFilename>%Skin%\StreamedMP\media\Steam-logo.png</DestinationFilename>
             </FileItem>
@@ -53,15 +53,15 @@
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>C:\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\MPsteam.xml</LocalFileName>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\MPsteam.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{06649d8c-2626-4327-8fbc-a6e1cdc2a5c2}-MPsteam.xml</ZipFileName>
               <DestinationFilename>%Skin%\DefaultWide\MPsteam.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>C:\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\Media\MPSteam\Steam-logo.png</LocalFileName>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\Media\MPSteam\Steam-logo.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{895850f0-b699-4b14-88ba-578bab4acbc5}-Steam-logo.png</ZipFileName>
               <DestinationFilename>%Skin%\DefaultWide\media\Steam-logo.png</DestinationFilename>
             </FileItem>
@@ -86,15 +86,15 @@
           <Items>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>C:\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\MPsteam.xml</LocalFileName>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\SkinFiles\Titan\MPsteam.xml</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{7769b649-25d1-44d9-ba11-364fa8c61d2a}-MPsteam.xml</ZipFileName>
               <DestinationFilename>%Skin%\Titan\MPsteam.xml</DestinationFilename>
             </FileItem>
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
-              <UpdateOption>OverwriteIfOlder</UpdateOption>
-              <LocalFileName>C:\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\Media\MPSteam\Steam-logo.png</LocalFileName>
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\Media\MPSteam\Steam-logo.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{b2fecc33-3896-437f-b6df-953b56551b2f}-Steam-logo.png</ZipFileName>
               <DestinationFilename>%Skin%\Titan\media\Steam-logo.png</DestinationFilename>
             </FileItem>
@@ -281,15 +281,32 @@ Click Next to continue or Cancel to exit Setup.</Value>
     </Items>
   </Dependencies>
   <PluginDependencies>
-    <Items />
+    <Items>
+      <PluginDependencyItem AssemblyName="MPsteam.dll">
+        <CompatibleVersion>
+          <Items>
+            <CompatibleVersionItem>
+              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
+              <DesignedForVersion>1.2.100.0</DesignedForVersion>
+            </CompatibleVersionItem>
+          </Items>
+        </CompatibleVersion>
+        <SubSystemsUsed>
+          <Items>
+            <SubSystemItem Name="MP.Config" />
+            <SubSystemItem Name="MP.SkinEngine" />
+          </Items>
+        </SubSystemsUsed>
+      </PluginDependencyItem>
+    </Items>
   </PluginDependencies>
   <GeneralInfo>
     <Name>MPsteam</Name>
     <Id>e41906ec-f7b0-4c03-ab05-315312b660a1</Id>
-    <Author>Tim Bleimehl</Author>
-    <HomePage />
+    <Author>Tim Bleimehl, Jens Bühl</Author>
+    <HomePage>https://github.com/motey/MPSteam</HomePage>
     <ForumPage>http://forum.team-mediaportal.com/threads/mpsteam-starting-valve-steam-in-big-picture-mode.114471/</ForumPage>
-    <UpdateUrl>https://raw.github.com/motey/MPSteam/master/bin/MPsteam_update.xml</UpdateUrl>
+    <UpdateUrl>https://raw.github.com/motey/MPSteam/master/setup/MPsteam_update.xml</UpdateUrl>
     <Version>
       <Major>0</Major>
       <Minor>0</Minor>
@@ -299,10 +316,10 @@ Click Next to continue or Cancel to exit Setup.</Value>
     <ExtensionDescription>This tiny extention adds an entry for starting Valve Steam in Big Pictre Mode to the menu.</ExtensionDescription>
     <VersionDescription>-Added Config</VersionDescription>
     <DevelopmentStatus>Alpha</DevelopmentStatus>
-    <OnlineLocation>https://github.com/motey/MPSteam/blob/master/bin/MPsteam_0.0.2.1.mpe1?raw=true</OnlineLocation>
+    <OnlineLocation>https://raw.github.com/motey/MPSteam/master/setup/MPsteam_0.0.2.1.mpe1</OnlineLocation>
     <ReleaseDate>2013-04-02T23:15:38</ReleaseDate>
     <Tags>steam, external app</Tags>
-    <Location>C:\Users\tim\Documents\GitHub\MPSteam\bin\[Name]_[Version].mpe1</Location>
+    <Location>C:\Users\tim\Documents\GitHub\MPSteam\Setup\[Name]_[Version].mpe1</Location>
     <Params>
       <Items>
         <SectionParam Name="Icon">
@@ -340,30 +357,37 @@ Click Next to continue or Cancel to exit Setup.</Value>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
-        <LocalFileName>C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\bin\Debug\MPsteam.dll</LocalFileName>
+        <LocalFileName>..\MPsteam\bin\Debug\MPsteam.dll</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{67206865-ae28-48a4-9ab4-f0d0d04ddb6f}-MPsteam.dll</ZipFileName>
-        <DestinationFilename>%Base%\MPsteam.dll</DestinationFilename>
+        <DestinationFilename>%Plugins%\Windows\MPsteam.dll</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>C:\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\MPsteam.xml</LocalFileName>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\MPsteam.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{26f72077-f54c-40e1-a586-fb351551319d}-MPsteam.xml</ZipFileName>
         <DestinationFilename>%Skin%\StreamedMP\MPsteam.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>C:\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\Media\MPSteam\Steam-logo.png</LocalFileName>
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\Media\MPSteam\Steam-logo.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{e9f15d54-0a5b-4651-8ae2-2114c87f8762}-Steam-logo.png</ZipFileName>
         <DestinationFilename>%Skin%\StreamedMP\media\Steam-logo.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\SkinFiles\Titan\MPsteam.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7769b649-25d1-44d9-ba11-364fa8c61d2a}-MPsteam.xml</ZipFileName>
+        <DestinationFilename>%Skin%\Titan\MPsteam.xml</DestinationFilename>
       </FileItem>
     </Items>
   </UniqueFileList>
   <ProjectSettings>
     <FolderGroups />
     <ProjectFilename>MPsteam.xmp2</ProjectFilename>
-    <UpdatePath1>C:\Users\tim\Documents\GitHub\MPSteam\bin\MPsteam_update.xml</UpdatePath1>
+    <UpdatePath1>C:\Users\tim\Documents\GitHub\MPSteam\Setup\MPsteam_update.xml</UpdatePath1>
     <UpdatePath2 />
     <UpdatePath3 />
   </ProjectSettings>
