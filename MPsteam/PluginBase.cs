@@ -288,11 +288,19 @@ namespace MpSteam
       //TODO: Move to seperate class
       private void LoadConfiguration()
       {
-	      string configPath = GetConfigurationPath();
+         string configPath = GetConfigurationPath();
          if (File.Exists(configPath))
          {
-            ConfigurationModel configurationModel = XMLSerializer.Load(configPath, typeof(ConfigurationModel)) as ConfigurationModel;
-            _configuration = new ConfigurationVM(configurationModel);
+            try
+            {
+               ConfigurationModel configurationModel = XMLSerializer.Load(configPath, typeof(ConfigurationModel)) as ConfigurationModel;
+               _configuration = new ConfigurationVM(configurationModel);
+            }
+            catch (Exception e)
+            {
+               //TODO: Log4Net here?
+               Console.WriteLine("LoadConfiguration failed: " + e.Message);
+            }
          }
       }
 
@@ -300,7 +308,15 @@ namespace MpSteam
       private void SaveConfiguration()
       {
          string configPath = GetConfigurationPath();
-         XMLSerializer.Save(configPath, _configuration.Model);
+         try
+         {
+            XMLSerializer.Save(configPath, _configuration.Model);
+         }
+         catch (Exception e)
+         {
+            //TODO: Log4Net here?
+            Console.WriteLine("SaveConfiguration failed: " + e.Message);
+         }     
       }
 
       //TODO: Move to seperate class
