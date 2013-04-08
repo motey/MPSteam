@@ -21,9 +21,10 @@ namespace MpSteam
       {
          cB_SetSteamActivated.Checked = _configuration.OverrideSteamPath;
          cB_StartScriptActivated.Checked = _configuration.RunPreStartScript;
-         cB_notBIG.Checked = !_configuration.StartInBigPicture;
+         cB_notBIG.Checked = _configuration.StartInBigPicture;
          tB_script.Text = _configuration.PreStartScriptPath;
          tB_steam.Text = _configuration.SteamPath;
+         tB_HomeMenuTitle.Text = _configuration.HomeMenuTitle;
       }
 
       private void b_searchScript_Click(object sender, EventArgs e)
@@ -58,9 +59,10 @@ namespace MpSteam
       {
          _configuration.OverrideSteamPath = cB_SetSteamActivated.Checked;
          _configuration.RunPreStartScript = cB_StartScriptActivated.Checked;
-         _configuration.StartInBigPicture = !cB_notBIG.Checked;
+         _configuration.StartInBigPicture = cB_notBIG.Checked;
          _configuration.SteamPath = tB_steam.Text;
          _configuration.PreStartScriptPath = tB_script.Text;
+         _configuration.HomeMenuTitle = tB_HomeMenuTitle.Text;
 
          this.DialogResult = DialogResult.OK;
          this.Close();
