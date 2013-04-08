@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<window>
+    <id>8465</id>
+    <defaultcontrol>2</defaultcontrol>
+    <allowoverlay>yes</allowoverlay>
+    <controls>
+        <control>
+            <id>5</id>
+            <description>an Image</description>
+            <type>image</type>
+            <posX>75</posX>
+            <posY>370</posY>
+            <texture>MPSteam/Steam-logo.png</texture>
+        </control>
+        <control>
+            <id>1</id>
+            <description>Steam Actions</description>
+            <type>label</type>
+            <posX>206</posX>
+            <posY>60</posY>
+            <font>font16</font>
+            <textcolor>ffffffff</textcolor>
+            <align>RIGHT</align>
+            <label>Valve Steam</label>
+        </control>
+        <control>
+            <id>2</id>
+            <description>ButtonStartAgain</description>
+            <type>button</type>
+            <onleft>2</onleft>
+            <onright>2</onright>
+            <onup>2</onup>
+            <ondown>3</ondown>
+            <posX>58</posX>
+            <posY>110</posY>
+            <width>311</width>
+            <label>Start Steam Again</label>
+        </control>
+        <control>
+            <id>3</id>
+            <description>ButtonSetFocus</description>
+            <type>button</type>
+            <onleft>2</onleft>
+            <onright>2</onright>
+            <onup>2</onup>
+            <ondown>2</ondown>
+            <posX>58</posX>
+            <posY>158</posY>
+            <width>311</width>
+            <label>Set Windows Focus on Steam</label>
+        </control>
+    </controls>
+</window>
