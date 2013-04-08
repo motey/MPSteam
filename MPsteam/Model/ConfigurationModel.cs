@@ -16,18 +16,17 @@ namespace MpSteam
          RunPreStartScript = false;
          OverrideSteamPath = false;
          SteamPath = String.Empty;
-         PreStartScriptPath = String.Empty;
+         ScriptPath = String.Empty;
+         HomeMenuTitle = "Start Steam";
       }
 
       [XmlElementAttribute("BigPictureMode")]
       public bool StartInBigPicture { get; set; }
       [XmlElementAttribute("ScriptActive")]
       public bool RunPreStartScript { get; set; }
-      [XmlElementAttribute("ScriptPath")]
-      public string PreStartScriptPath { get; set; }
-      [XmlElementAttribute("OverrideSteamPath")]
+      public string ScriptPath { get; set; }
       public bool OverrideSteamPath { get; set; }
-      [XmlElementAttribute("SteamPath")]
       public string SteamPath { get; set; }
+      public string HomeMenuTitle { get; set; }
    }
 }

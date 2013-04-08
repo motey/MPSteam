@@ -19,12 +19,13 @@ namespace MpSteam
       /// <param name="configToCopy">Configuration that is cloned</param>
       public ConfigurationVM(ConfigurationVM configToCopy)
       {
-         Title = configToCopy.Title;
+         Title = configToCopy.Title.Clone() as string;
          StartInBigPicture = configToCopy.StartInBigPicture;
          RunPreStartScript = configToCopy.RunPreStartScript;
          OverrideSteamPath = configToCopy.OverrideSteamPath;
          SteamPath = configToCopy.SteamPath.Clone() as string;
          PreStartScriptPath = configToCopy.PreStartScriptPath.Clone() as string;
+         HomeMenuTitle = configToCopy.HomeMenuTitle.Clone() as string;
       }
 
       public string Title { get; set; }
@@ -67,14 +68,14 @@ namespace MpSteam
       {
          get
          {
-            return _configurationModel.PreStartScriptPath;
+            return _configurationModel.ScriptPath;
          }
          set
          {
-            if (value != _configurationModel.PreStartScriptPath)
+            if (value != _configurationModel.ScriptPath)
             {
-               _configurationModel.PreStartScriptPath = value;
-               OnPropertyChanged("PreStartScriptPath");
+               _configurationModel.ScriptPath = value;
+               OnPropertyChanged("ScriptPath");
             }
          }
       }
@@ -110,6 +111,23 @@ namespace MpSteam
             }
          }
       }
+
+      public string HomeMenuTitle
+      {
+         get 
+         { 
+            return _configurationModel.HomeMenuTitle; 
+         }
+         set
+         {
+            if (value != _configurationModel.HomeMenuTitle)
+            {
+               _configurationModel.HomeMenuTitle = value;
+               OnPropertyChanged("HomeMenuTitle");
+            }
+         }
+      }
+      
 
       public object Clone()
       {
