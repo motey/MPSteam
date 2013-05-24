@@ -32,6 +32,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>
+    </ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Utils">
       <HintPath>..\Import\Common.Utils.dll</HintPath>
@@ -77,7 +81,6 @@
       <DependentUpon>configWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Page Include="View\ConfigurationView.xaml">
       <SubType>Designer</SubType>

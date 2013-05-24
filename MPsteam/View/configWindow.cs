@@ -25,6 +25,7 @@ namespace MpSteam
          tB_script.Text = _configuration.PreStartScriptPath;
          tB_steam.Text = _configuration.SteamPath;
          tB_HomeMenuTitle.Text = _configuration.HomeMenuTitle;
+         spin_delay.Value = _configuration.PreStartScriptDelay;
       }
 
       private void b_searchScript_Click(object sender, EventArgs e)
@@ -63,6 +64,7 @@ namespace MpSteam
          _configuration.SteamPath = tB_steam.Text;
          _configuration.PreStartScriptPath = tB_script.Text;
          _configuration.HomeMenuTitle = tB_HomeMenuTitle.Text;
+         _configuration.PreStartScriptDelay = decimal.ToInt32(spin_delay.Value);
 
          this.DialogResult = DialogResult.OK;
          this.Close();

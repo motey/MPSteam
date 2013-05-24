@@ -17,6 +17,7 @@ namespace MpSteam
          OverrideSteamPath = false;
          SteamPath = String.Empty;
          ScriptPath = String.Empty;
+         ScriptDelay = 0;
          HomeMenuTitle = "Start Steam";
       }
 
@@ -25,6 +26,7 @@ namespace MpSteam
       [XmlElementAttribute("ScriptActive")]
       public bool RunPreStartScript { get; set; }
       public string ScriptPath { get; set; }
+      public int ScriptDelay { get; set; }
       public bool OverrideSteamPath { get; set; }
       public string SteamPath { get; set; }
       public string HomeMenuTitle { get; set; }

@@ -25,6 +25,7 @@ namespace MpSteam
          OverrideSteamPath = configToCopy.OverrideSteamPath;
          SteamPath = configToCopy.SteamPath.Clone() as string;
          PreStartScriptPath = configToCopy.PreStartScriptPath.Clone() as string;
+         PreStartScriptDelay = configToCopy.PreStartScriptDelay;
          HomeMenuTitle = configToCopy.HomeMenuTitle.Clone() as string;
       }
 
@@ -76,6 +77,22 @@ namespace MpSteam
             {
                _configurationModel.ScriptPath = value;
                OnPropertyChanged("ScriptPath");
+            }
+         }
+      }
+
+      public int PreStartScriptDelay
+      {
+         get
+         {
+            return _configurationModel.ScriptDelay;
+         }
+         set
+         {
+            if (value != _configurationModel.ScriptDelay)
+            {
+               _configurationModel.ScriptDelay = value;
+               OnPropertyChanged("ScriptDelay");
             }
          }
       }

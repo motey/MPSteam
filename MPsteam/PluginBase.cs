@@ -231,13 +231,11 @@ namespace MpSteam
       /// </summary>
       private void StartSteam()
       {
-          if (_configuration.RunPreStartScript && File.Exists(_configuration.PreStartScriptPath))
+         if (_configuration.RunPreStartScript)
          {
-            string scriptPath = _configuration.PreStartScriptPath;
-            Process script = new Process();
-            script.StartInfo.FileName = scriptPath;
-            script.Start();
+            RunPreStartScript(_configuration.PreStartScriptPath, _configuration.PreStartScriptDelay);
          }
+
          string steamapp = GetSteamExePath();
          if (steamapp != "NF" && File.Exists(steamapp))
          {
@@ -283,6 +281,27 @@ namespace MpSteam
             dlg.SetLine(3, String.Empty);
             dlg.DoModal(GUIWindowManager.ActiveWindow);
          }
+      }
+
+      /// <summary>
+      /// Starts a pre start script at given path with given delay in milliseconds
+      /// </summary>
+      /// <param name="path">Path to the executable</param>
+      /// <param name="delay">Delay before executing the script</param>
+      private void RunPreStartScript(string path, int delay)
+      {
+         if (!File.Exists(_configuration.PreStartScriptPath))
+         {
+            //Add log entry here?
+            throw new ArgumentException("File does not exist");
+         }
+
+         Process script = new Process();
+         script.StartInfo.FileName = path;
+
+         //Delay the start, simple way, eventually blocking GUI?
+         System.Threading.Thread.Sleep(delay);
+         script.Start();
       }
 
       //TODO: Move to seperate class
