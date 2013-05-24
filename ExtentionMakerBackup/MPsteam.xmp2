@@ -17,6 +17,13 @@
               <ZipFileName>Installer{CopyFile}\{67206865-ae28-48a4-9ab4-f0d0d04ddb6f}-MPsteam.dll</ZipFileName>
               <DestinationFilename>%Plugins%\Windows\MPsteam.dll</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\MPsteam.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{e5f133c4-57c4-4a46-9b1d-16645f467e49}-MPsteam.xml</ZipFileName>
+              <DestinationFilename>%Config%\MPsteam.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -311,10 +318,11 @@ Click Next to continue or Cancel to exit Setup.</Value>
       <Major>0</Major>
       <Minor>0</Minor>
       <Build>2</Build>
-      <Revision>1</Revision>
+      <Revision>2</Revision>
     </Version>
     <ExtensionDescription>This tiny extention adds an entry for starting Valve Steam in Big Pictre Mode to the menu.</ExtensionDescription>
-    <VersionDescription>-Added Config</VersionDescription>
+    <VersionDescription>-Added adjustable delay
+-Added config to installation</VersionDescription>
     <DevelopmentStatus>Alpha</DevelopmentStatus>
     <OnlineLocation>https://github.com/motey/MPSteam/raw/master/Setup/MPsteam_0.0.2.1.mpe1</OnlineLocation>
     <ReleaseDate>2013-04-02T23:15:38</ReleaseDate>
@@ -323,7 +331,7 @@ Click Next to continue or Cancel to exit Setup.</Value>
     <Params>
       <Items>
         <SectionParam Name="Icon">
-          <Value />
+          <Value>..\Import\Icons\steam1.ico</Value>
           <ValueType>File</ValueType>
           <Description>The icon file of the package (jpg,png,bmp)</Description>
         </SectionParam>
@@ -364,6 +372,13 @@ Click Next to continue or Cancel to exit Setup.</Value>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\MPsteam.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e5f133c4-57c4-4a46-9b1d-16645f467e49}-MPsteam.xml</ZipFileName>
+        <DestinationFilename>%Config%\MPsteam.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\MPsteam.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{26f72077-f54c-40e1-a586-fb351551319d}-MPsteam.xml</ZipFileName>
         <DestinationFilename>%Skin%\StreamedMP\MPsteam.xml</DestinationFilename>
@@ -381,6 +396,13 @@ Click Next to continue or Cancel to exit Setup.</Value>
         <LocalFileName>..\SkinFiles\Titan\MPsteam.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{7769b649-25d1-44d9-ba11-364fa8c61d2a}-MPsteam.xml</ZipFileName>
         <DestinationFilename>%Skin%\Titan\MPsteam.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
+        <Param1 />
+        <UpdateOption>OverwriteIfOlder</UpdateOption>
+        <LocalFileName>..\Import\Icons\steam1.ico</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{9ef4ad68-f3f0-4f42-8645-987a8d946a81}-steam1.ico</ZipFileName>
+        <DestinationFilename />
       </FileItem>
     </Items>
   </UniqueFileList>
