@@ -44,9 +44,9 @@
             <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
-              <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\Media\MPSteam\Steam-logo.png</LocalFileName>
+              <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\skin\StreamedMP\Media\Steam-logo.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{e9f15d54-0a5b-4651-8ae2-2114c87f8762}-Steam-logo.png</ZipFileName>
-              <DestinationFilename>%Skin%\StreamedMP\media\Steam-logo.png</DestinationFilename>
+              <DestinationFilename>%Skin%\StreamedMP\Media\Steam-logo.png</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -331,7 +331,7 @@ Click Next to continue or Cancel to exit Setup.</Value>
     <Params>
       <Items>
         <SectionParam Name="Icon">
-          <Value>..\Import\Icons\steam1.ico</Value>
+          <Value>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\skin\StreamedMP\Media\Steam-logo.png</Value>
           <ValueType>File</ValueType>
           <Description>The icon file of the package (jpg,png,bmp)</Description>
         </SectionParam>
@@ -383,12 +383,19 @@ Click Next to continue or Cancel to exit Setup.</Value>
         <ZipFileName>Installer{CopyFile}\{26f72077-f54c-40e1-a586-fb351551319d}-MPsteam.xml</ZipFileName>
         <DestinationFilename>%Skin%\StreamedMP\MPsteam.xml</DestinationFilename>
       </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\skin\StreamedMP\Media\Steam-logo.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{e9f15d54-0a5b-4651-8ae2-2114c87f8762}-Steam-logo.png</ZipFileName>
+        <DestinationFilename>%Skin%\StreamedMP\Media\Steam-logo.png</DestinationFilename>
+      </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\Skin\StreamedMP\Media\MPSteam\Steam-logo.png</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{e9f15d54-0a5b-4651-8ae2-2114c87f8762}-Steam-logo.png</ZipFileName>
-        <DestinationFilename>%Skin%\StreamedMP\media\Steam-logo.png</DestinationFilename>
+        <ZipFileName>Installer{CopyFile}\{895850f0-b699-4b14-88ba-578bab4acbc5}-Steam-logo.png</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\media\Steam-logo.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
@@ -396,13 +403,6 @@ Click Next to continue or Cancel to exit Setup.</Value>
         <LocalFileName>..\SkinFiles\Titan\MPsteam.xml</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{7769b649-25d1-44d9-ba11-364fa8c61d2a}-MPsteam.xml</ZipFileName>
         <DestinationFilename>%Skin%\Titan\MPsteam.xml</DestinationFilename>
-      </FileItem>
-      <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
-        <Param1 />
-        <UpdateOption>OverwriteIfOlder</UpdateOption>
-        <LocalFileName>..\Import\Icons\steam1.ico</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{9ef4ad68-f3f0-4f42-8645-987a8d946a81}-steam1.ico</ZipFileName>
-        <DestinationFilename />
       </FileItem>
     </Items>
   </UniqueFileList>
