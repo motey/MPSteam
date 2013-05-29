@@ -27,9 +27,7 @@ using MediaPortal.Common.Utils;
 using MediaPortal.Dialogs;
 using MediaPortal.GUI.Library;
 
-[assembly: CompatibleVersion("1.2.100.0", "1.1.6.27644")]
-[assembly: UsesSubsystem("MP.SkinEngine")]
-[assembly: UsesSubsystem("MP.Config")]
+
 
 namespace MPsteam
 {

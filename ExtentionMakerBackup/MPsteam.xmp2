@@ -21,7 +21,7 @@
               <Param1 />
               <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\MPsteam.xml</LocalFileName>
-              <ZipFileName>Installer{CopyFile}\{e5f133c4-57c4-4a46-9b1d-16645f467e49}-MPsteam.xml</ZipFileName>
+              <ZipFileName>Installer{CopyFile}\{58db61ac-2a32-459d-9b2b-aa2e0fee7628}-MPsteam.xml</ZipFileName>
               <DestinationFilename>%Config%\MPsteam.xml</DestinationFilename>
             </FileItem>
           </Items>
@@ -46,7 +46,7 @@
               <UpdateOption>AlwaysOverwrite</UpdateOption>
               <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\skin\StreamedMP\Media\Steam-logo.png</LocalFileName>
               <ZipFileName>Installer{CopyFile}\{e9f15d54-0a5b-4651-8ae2-2114c87f8762}-Steam-logo.png</ZipFileName>
-              <DestinationFilename>%Skin%\StreamedMP\Media\Steam-logo.png</DestinationFilename>
+              <DestinationFilename>%Skin%\StreamedMP\media\Steam-logo.png</DestinationFilename>
             </FileItem>
           </Items>
         </Files>
@@ -294,15 +294,12 @@ Click Next to continue or Cancel to exit Setup.</Value>
           <Items>
             <CompatibleVersionItem>
               <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
-              <DesignedForVersion>1.2.100.0</DesignedForVersion>
+              <DesignedForVersion>1.3.100.0</DesignedForVersion>
             </CompatibleVersionItem>
           </Items>
         </CompatibleVersion>
         <SubSystemsUsed>
-          <Items>
-            <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.SkinEngine" />
-          </Items>
+          <Items />
         </SubSystemsUsed>
       </PluginDependencyItem>
     </Items>
@@ -373,7 +370,7 @@ Click Next to continue or Cancel to exit Setup.</Value>
         <Param1 />
         <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\MPsteam.xml</LocalFileName>
-        <ZipFileName>Installer{CopyFile}\{e5f133c4-57c4-4a46-9b1d-16645f467e49}-MPsteam.xml</ZipFileName>
+        <ZipFileName>Installer{CopyFile}\{58db61ac-2a32-459d-9b2b-aa2e0fee7628}-MPsteam.xml</ZipFileName>
         <DestinationFilename>%Config%\MPsteam.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
@@ -388,7 +385,7 @@ Click Next to continue or Cancel to exit Setup.</Value>
         <UpdateOption>AlwaysOverwrite</UpdateOption>
         <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\skin\StreamedMP\Media\Steam-logo.png</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{e9f15d54-0a5b-4651-8ae2-2114c87f8762}-Steam-logo.png</ZipFileName>
-        <DestinationFilename>%Skin%\StreamedMP\Media\Steam-logo.png</DestinationFilename>
+        <DestinationFilename>%Skin%\StreamedMP\media\Steam-logo.png</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />

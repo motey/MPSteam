@@ -1,0 +1,13 @@
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\bin\Debug\MPsteam.dll
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\bin\Debug\MPsteam.pdb
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\bin\Debug\Common.Utils.dll
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\bin\Debug\Core.dll
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\bin\Debug\Dialogs.dll
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\bin\Debug\Utils.dll
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\bin\Debug\MediaPortal.Support.dll
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\obj\Debug\MPsteam.configWindow.resources
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\obj\Debug\ResGen.read.1.tlog
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\obj\Debug\ResGen.write.1.tlog
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\obj\Debug\MPsteam.dll
+C:\Users\tim\Documents\GitHub\MPSteam\MPsteam\obj\Debug\MPsteam.pdb
