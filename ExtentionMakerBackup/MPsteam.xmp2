@@ -17,6 +17,13 @@
               <ZipFileName>Installer{CopyFile}\{67206865-ae28-48a4-9ab4-f0d0d04ddb6f}-MPsteam.dll</ZipFileName>
               <DestinationFilename>%Plugins%\Windows\MPsteam.dll</DestinationFilename>
             </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\MPsteam.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{58db61ac-2a32-459d-9b2b-aa2e0fee7628}-MPsteam.xml</ZipFileName>
+              <DestinationFilename>%Config%\MPsteam.xml</DestinationFilename>
+            </FileItem>
           </Items>
         </Files>
       </GroupItem>
@@ -286,16 +293,13 @@ Click Next to continue or Cancel to exit Setup.</Value>
         <CompatibleVersion>
           <Items>
             <CompatibleVersionItem>
-              <MinRequiredVersion>1.3.100.0</MinRequiredVersion>
+              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
               <DesignedForVersion>1.3.100.0</DesignedForVersion>
             </CompatibleVersionItem>
           </Items>
         </CompatibleVersion>
         <SubSystemsUsed>
-          <Items>
-            <SubSystemItem Name="MP.Config" />
-            <SubSystemItem Name="MP.SkinEngine" />
-          </Items>
+          <Items />
         </SubSystemsUsed>
       </PluginDependencyItem>
     </Items>
@@ -361,6 +365,13 @@ Click Next to continue or Cancel to exit Setup.</Value>
         <LocalFileName>..\MPsteam\bin\Debug\MPsteam.dll</LocalFileName>
         <ZipFileName>Installer{CopyFile}\{67206865-ae28-48a4-9ab4-f0d0d04ddb6f}-MPsteam.dll</ZipFileName>
         <DestinationFilename>%Plugins%\Windows\MPsteam.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\MPsteam.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{58db61ac-2a32-459d-9b2b-aa2e0fee7628}-MPsteam.xml</ZipFileName>
+        <DestinationFilename>%Config%\MPsteam.xml</DestinationFilename>
       </FileItem>
       <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
         <Param1 />
