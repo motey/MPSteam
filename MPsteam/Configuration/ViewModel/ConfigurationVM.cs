@@ -196,7 +196,8 @@ namespace MPsteam
          {
             //TODO: Log4Net here?
             Console.WriteLine("LoadFromFile failed: File does not exist");
-            throw new FileNotFoundException();
+            //TODO: Throwing is okay, but it should be handled above. Exception removed as a quick fix.
+            //throw new FileNotFoundException();
          }
       }
 
