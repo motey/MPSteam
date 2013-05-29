@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using System.IO;
 
-namespace MpSteam
+namespace MPsteam
 {
    public partial class configWindow : Form
    {

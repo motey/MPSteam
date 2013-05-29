@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Serialization;
 
-namespace MpSteam
+namespace MPsteam
 {
    public static class XMLSerializer
    {

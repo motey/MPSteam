@@ -1,4 +1,4 @@
-﻿namespace MpSteam
+﻿namespace MPsteam
 {
     partial class configWindow
     {

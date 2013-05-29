@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 
-namespace MpSteam
+namespace MPsteam
 {
    public static class FocusChanger
    {
@@ -21,7 +21,7 @@ namespace MpSteam
       /// check if current process already running. if running, set focus to existing process and 
       /// returns <see langword="true"/> otherwise returns <see langword="false"/>.
       /// </summary>
-      public static void SetFocusToSteam()
+      public static void SetFocusTo(string procName)
       {
          /*
          const int SW_HIDE = 0;
@@ -33,7 +33,7 @@ namespace MpSteam
          */
          const int SW_RESTORE = 9;
 
-         var arrProcesses = Process.GetProcessesByName("Steam");
+         var arrProcesses = Process.GetProcessesByName(procName);
          for (var i = 0; i < arrProcesses.Length; i++)
          {
             // get the window handle

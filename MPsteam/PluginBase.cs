@@ -1,18 +1,16 @@
 ﻿using System;
-using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
 
 using MediaPortal.Common.Utils;
 using MediaPortal.Dialogs;
 using MediaPortal.GUI.Library;
-using Microsoft.Win32;
 
 [assembly: CompatibleVersion("1.2.100.0", "1.1.6.27644")]
 [assembly: UsesSubsystem("MP.SkinEngine")]
 [assembly: UsesSubsystem("MP.Config")]
 
-namespace MpSteam
+namespace MPsteam
 {
    public class PluginBase : GUIWindow, ISetupForm
    {
@@ -41,7 +39,7 @@ namespace MpSteam
       /// <returns>Author string</returns>
       public string Author()
       {
-         return "Tim 'motey' Bleimehl";
+         return "Tim 'motey' Bleimehl, Jens 'exe' Buehl";
       }
 
       /// <summary>
@@ -49,15 +47,15 @@ namespace MpSteam
       /// </summary>
       public void ShowPlugin()
       {
-         LoadConfiguration();
-         configWindow wnd = new configWindow(_configuration.Clone() as ConfigurationVM);
+         _configurationVM.LoadFromFile(GetConfigurationPath());
+         configWindow wnd = new configWindow(_configurationVM.Clone() as ConfigurationVM);
          wnd.ShowDialog();
 
          if (wnd.DialogResult == DialogResult.OK)
          {
             //Save changes
-            _configuration = wnd.GetResult();
-            SaveConfiguration();
+            _configurationVM = wnd.GetResult();
+            _configurationVM.SaveToFile(GetConfigurationPath());
          }
          
       }
@@ -111,7 +109,7 @@ namespace MpSteam
       /// false : plugin does not need it's own button on home</returns>
       public bool GetHome(out string strButtonText, out string strButtonImage, out string strButtonImageFocus, out string strPictureImage)
       {
-         strButtonText = _configuration.HomeMenuTitle;
+         strButtonText = _configurationVM.HomeMenuTitle;
          strButtonImage = String.Empty;
          strButtonImageFocus = String.Empty;
          strPictureImage = String.Empty;
@@ -135,18 +133,23 @@ namespace MpSteam
       }
 
       /// <summary>
-      /// Initialize the plugin
+      /// Initialize the window plugin
       /// </summary>
       /// <returns>True if successfull, else false</returns>
       public override bool Init()
       {
-         LoadConfiguration();      
+         //Init configuration settings
+         _configurationVM.LoadFromFile(GetConfigurationPath());      
+
+         //Init facade with loaded configuration data
+         _steamFacade = new SteamFacade(_configurationVM);
+
          return Load(GUIGraphicsContext.Skin + @"\MPsteam.xml");
       }
 
       protected override void OnPageLoad()
       {
-         StartSteam();
+         _steamFacade.Start();
          GUIDialogNotify dlg = (GUIDialogNotify)GUIWindowManager.GetWindow(
            (int)GUIWindow.Window.WINDOW_DIALOG_NOTIFY);
          dlg.SetHeading("Info");
@@ -157,190 +160,17 @@ namespace MpSteam
       protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
       {
          if (control == _buttonStart)
-            OnButtonStart();
+            _steamFacade.Start();
          else if (control == _buttonFocus)
-            OnButtonFocus();
+            _steamFacade.SetFocus();
 
          base.OnClicked(controlId, control, actionType);
       }
 
-      #endregion
-      
-      /// <summary>
-      /// Button start click handler
-      /// </summary>
-      private void OnButtonStart()
-      {
-         StartSteam();
-      }
+      #endregion  
 
-      /// <summary>
-      /// Button focus click handler
-      /// </summary>
-      private void OnButtonFocus()
-      {
-         FocusChanger.SetFocusToSteam();
-      }
-
-      /// <summary>
-      /// Check if steam is already running or not
-      /// </summary>
-      /// <returns>True if steam is running, else false</returns>
-      private bool IsSteamRunning()
-      {
-         foreach (Process steamProcess in System.Diagnostics.Process.GetProcesses())
-         {
-            if (steamProcess.ProcessName.Contains("Steam"))
-            {
-               return true;
-            }
-         }
-         return false;
-      }
-
-      /// <summary>
-      /// Get path to steam executable
-      /// </summary>
-      /// <returns>Path to steam executable</returns>
-      private string GetSteamExePath()
-      {
-        if (_configuration.OverrideSteamPath && File.Exists(_configuration.SteamPath))
-        {             
-            return _configuration.SteamPath;
-        }
-         else
-         {
-            RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.OpenSubKey(@"Software\Valve\Steam");
-
-            if (regKey != null)
-            {
-               string installpath = regKey.GetValue("SteamExe").ToString();
-               return installpath;
-            }
-            else
-            {
-               return "NF"; //Not found
-            }
-         }
-
-      }
-
-      /// <summary>
-      /// Start steam, method does too much at the moment
-      /// </summary>
-      private void StartSteam()
-      {
-         if (_configuration.RunPreStartScript)
-         {
-            RunPreStartScript(_configuration.PreStartScriptPath, _configuration.PreStartScriptDelay);
-         }
-
-         string steamapp = GetSteamExePath();
-         if (steamapp != "NF" && File.Exists(steamapp))
-         {
-
-            if (IsSteamRunning())
-            {
-               Process steam = new Process();
-               steam.StartInfo.FileName = steamapp;
-               if (!_configuration.StartInBigPicture)
-               {
-                  steam.StartInfo.Arguments = "";
-               }
-               else
-               {
-                  steam.StartInfo.Arguments = "steam://open/bigpicture";
-               }
-               steam.Start();
-            }
-            else
-            {
-               Process steam = new Process();
-               steam.StartInfo.FileName = steamapp;
-               if (!_configuration.StartInBigPicture)
-               {
-                  steam.StartInfo.Arguments = "";
-               }
-               else
-               {
-                  steam.StartInfo.Arguments = "-bigpicture";
-               }
-
-               steam.Start();
-
-            }
-         }
-         else
-         {
-            GUIDialogOK dlg = (GUIDialogOK)GUIWindowManager.GetWindow(
-            (int)GUIWindow.Window.WINDOW_DIALOG_OK);
-            dlg.SetHeading("Steam Not Found");
-            dlg.SetLine(1, "Sorry, can't find your Steam.exe!");
-            dlg.SetLine(2, String.Empty);
-            dlg.SetLine(3, String.Empty);
-            dlg.DoModal(GUIWindowManager.ActiveWindow);
-         }
-      }
-
-      /// <summary>
-      /// Starts a pre start script at given path with given delay in milliseconds
-      /// </summary>
-      /// <param name="path">Path to the executable</param>
-      /// <param name="delay">Delay before executing the script</param>
-      private void RunPreStartScript(string path, int delay)
-      {
-         if (!File.Exists(_configuration.PreStartScriptPath))
-         {
-            //Add log entry here?
-            throw new ArgumentException("File does not exist");
-         }
-
-         Process script = new Process();
-         script.StartInfo.FileName = path;
-
-         //Delay the start, simple way, eventually blocking GUI?
-         System.Threading.Thread.Sleep(delay);
-         script.Start();
-      }
-
-      //TODO: Move to seperate class
-      private void LoadConfiguration()
-      {
-         string configPath = GetConfigurationPath();
-         if (File.Exists(configPath))
-         {
-            try
-            {
-               ConfigurationModel configurationModel = XMLSerializer.Load(configPath, typeof(ConfigurationModel)) as ConfigurationModel;
-               _configuration = new ConfigurationVM(configurationModel);
-            }
-            catch (Exception e)
-            {
-               //TODO: Log4Net here?
-               Console.WriteLine("LoadConfiguration failed: " + e.Message);
-            }
-         }
-      }
-
-      //TODO: Move to seperate class
-      private void SaveConfiguration()
-      {
-         string configPath = GetConfigurationPath();
-         try
-         {
-            XMLSerializer.Save(configPath, _configuration.Model);
-         }
-         catch (Exception e)
-         {
-            //TODO: Log4Net here?
-            Console.WriteLine("SaveConfiguration failed: " + e.Message);
-         }     
-      }
-
-      //TODO: Move to seperate class
       private string GetConfigurationPath()
-      {       
+      {
          //TODO: Test on XP, Where are other MP skins, configs installed on XP?
          //if (Environment.OSVersion.Version.Major > 4 && Environment.OSVersion.Version.Minor > 1)
          {
@@ -356,7 +186,8 @@ namespace MpSteam
       protected GUIButtonControl _buttonFocus = null; 
 
       private const short _windowID = 8465;
-      private ConfigurationVM _configuration = new ConfigurationVM(new ConfigurationModel());
+      private SteamFacade _steamFacade;
+      private ConfigurationVM _configurationVM = new ConfigurationVM();
 
       #endregion    
    } 

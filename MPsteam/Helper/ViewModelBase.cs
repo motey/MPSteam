@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace MpSteam
+namespace MPsteam
 {
    /// <summary>
    /// A base class implementation of INotifyPropertyChanged, 

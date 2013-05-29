@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace MpSteam
+namespace MPsteam
 {
    public class ConfigurationVM : ViewModelBase, ICloneable
    {
@@ -11,6 +12,12 @@ namespace MpSteam
       {
          Title = "MPsteam settings";
          _configurationModel = model;
+      }
+
+      public ConfigurationVM()
+      {
+         Title = "MPsteam settings";
+         _configurationModel = new ConfigurationModel();
       }
 
       /// <summary>
@@ -145,10 +152,46 @@ namespace MpSteam
          }
       }
       
-
       public object Clone()
       {
          return new ConfigurationVM(this);
+      }
+
+      public void LoadFromFile(string configPath)
+      {
+         if (File.Exists(configPath))
+         {
+            try
+            {
+               _configurationModel = XMLSerializer.Load(configPath, typeof(ConfigurationModel)) as ConfigurationModel;
+            }
+            catch (Exception e)
+            {
+               //TODO: Log4Net here?
+               Console.WriteLine("LoadFromFile failed: " + e.Message);
+               throw e;
+            }
+         }
+         else
+         {
+            //TODO: Log4Net here?
+            Console.WriteLine("LoadFromFile failed: File does not exist");
+            throw new FileNotFoundException();
+         }
+      }
+
+      public void SaveToFile(string configPath)
+      {
+         try
+         {
+            XMLSerializer.Save(configPath, Model);
+         }
+         catch (Exception e)
+         {
+            //TODO: Log4Net here?
+            Console.WriteLine("SaveToFile failed: " + e.Message);
+            throw e;
+         }
       }
 
       private ConfigurationModel _configurationModel = new ConfigurationModel();   
