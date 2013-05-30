@@ -76,7 +76,7 @@ namespace MPsteam
          }
       }
 
-      private void b_save_Click(object sender, EventArgs e)
+      private void b_ok_Click(object sender, EventArgs e)
       {
          _configuration.OverrideSteamPath = cB_SetSteamActivated.Checked;
          _configuration.RunPreStartScript = cB_StartScriptActivated.Checked;
@@ -95,8 +95,6 @@ namespace MPsteam
          this.DialogResult = DialogResult.Cancel;
          this.Close();
       }
-
-      ConfigurationVM _configuration = new ConfigurationVM(new ConfigurationModel());
 
       private void cB_StartScriptActivated_CheckedChanged(object sender, EventArgs e)
       {
@@ -121,5 +119,7 @@ namespace MPsteam
               }
           }
       }
+
+      ConfigurationVM _configuration;
    }
 }

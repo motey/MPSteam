@@ -66,7 +66,11 @@ namespace MPsteam
       /// </summary>
       public void ShowPlugin()
       {
-         _configurationVM.LoadFromFile(GetConfigurationPath());
+         //Only load if configuration exists
+         if (File.Exists(_configurationVM.ConfigPath))
+            _configurationVM.LoadFromFile(_configurationVM.ConfigPath);
+
+         //Init dialog with configuration data
          configWindow wnd = new configWindow(_configurationVM.Clone() as ConfigurationVM);
          wnd.ShowDialog();
 
@@ -74,7 +78,7 @@ namespace MPsteam
          {
             //Save changes
             _configurationVM = wnd.GetResult();
-            _configurationVM.SaveToFile(GetConfigurationPath());
+            _configurationVM.SaveToFile(_configurationVM.ConfigPath);
          }
          
       }
@@ -157,10 +161,11 @@ namespace MPsteam
       /// <returns>True if successfull, else false</returns>
       public override bool Init()
       {
-         //Init configuration settings
-         _configurationVM.LoadFromFile(GetConfigurationPath());      
+         //Only load if configuration exists
+         if (File.Exists(_configurationVM.ConfigPath))
+            _configurationVM.LoadFromFile(_configurationVM.ConfigPath);
 
-         //Init facade with loaded configuration data
+         //Init facade with configuration data
          _steamFacade = new SteamFacade(_configurationVM);
 
          return Load(GUIGraphicsContext.Skin + @"\MPsteam.xml");
@@ -172,10 +177,11 @@ namespace MPsteam
          GUIDialogNotify dlg = (GUIDialogNotify)GUIWindowManager.GetWindow(
            (int)GUIWindow.Window.WINDOW_DIALOG_NOTIFY);
          dlg.SetHeading("Info");
-         dlg.SetText("Trying to start Steam!");
+         dlg.SetText("Starting Steam!");
          dlg.TimeOut = 8;
          dlg.DoModal(GUIWindowManager.ActiveWindow);
       }
+
       protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
       {
          if (control == _buttonStart)
@@ -185,17 +191,7 @@ namespace MPsteam
 
          base.OnClicked(controlId, control, actionType);
       }
-
       #endregion  
-
-      private string GetConfigurationPath()
-      {
-         //TODO: Test on XP, Where are other MP skins, configs installed on XP?
-         //if (Environment.OSVersion.Version.Major > 4 && Environment.OSVersion.Version.Minor > 1)
-         {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"Team MediaPortal\MediaPortal\MPsteam.xml");
-         }
-      }
 
       #region private members
 

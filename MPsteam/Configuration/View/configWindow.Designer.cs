@@ -79,7 +79,7 @@ namespace MPsteam
          this.b_save.TabIndex = 0;
          this.b_save.Text = "OK";
          this.b_save.UseVisualStyleBackColor = true;
-         this.b_save.Click += new System.EventHandler(this.b_save_Click);
+         this.b_save.Click += new System.EventHandler(this.b_ok_Click);
          // 
          // cB_notBIG
          // 

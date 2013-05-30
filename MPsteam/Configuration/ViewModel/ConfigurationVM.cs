@@ -30,14 +30,14 @@ namespace MPsteam
    {
       public ConfigurationVM(ConfigurationModel model)
       {
-         Title = "MPsteam settings";
-         _configurationModel = model;
+         //TODO: Kann man den MP Path auch über die MediaPortalAPI direkt abfragen?
+         ConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"Team MediaPortal\MediaPortal\MPsteam.xml");
+         Title = "MPsteam Configuration";
+         Model = model;
       }
 
-      public ConfigurationVM()
+      public ConfigurationVM() : this (new ConfigurationModel())
       {
-         Title = "MPsteam settings";
-         _configurationModel = new ConfigurationModel();
       }
 
       /// <summary>
@@ -47,6 +47,7 @@ namespace MPsteam
       public ConfigurationVM(ConfigurationVM configToCopy)
       {
          Title = configToCopy.Title.Clone() as string;
+         ConfigPath = configToCopy.ConfigPath.Clone() as string;
          StartInBigPicture = configToCopy.StartInBigPicture;
          RunPreStartScript = configToCopy.RunPreStartScript;
          OverrideSteamPath = configToCopy.OverrideSteamPath;
@@ -56,10 +57,81 @@ namespace MPsteam
          HomeMenuTitle = configToCopy.HomeMenuTitle.Clone() as string;
       }
 
-      public string Title { get; set; }
-      public ConfigurationModel Model { get { return _configurationModel; } }
+      #region Additional VM properties and methods
+      /// <summary>
+      /// Title, used for Window title
+      /// </summary>
+      public string Title { get; private set; }
 
-      //Wrapped properties from configruation data
+      /// <summary>
+      /// Actual data class that is beeing stored
+      /// </summary>
+      public ConfigurationModel Model 
+      { 
+         get 
+         {
+            return _configurationModel; 
+         }
+         private set
+         {
+            _configurationModel = value;
+         }
+      }
+
+      /// <summary>
+      /// Path to the configuration file
+      /// </summary>
+      public string ConfigPath
+      {
+         get
+         {
+            return _configurationPath;
+         }
+         private set
+         {
+            if (value != _configurationPath)
+            {
+               _configurationPath = value;
+            }
+         }
+      }
+
+      /// <summary>
+      /// Load data from given file
+      /// </summary>
+      /// <param name="configPath">Path to configuration file</param>
+      public void LoadFromFile(string configPath)
+      {
+         try
+         {
+            _configurationModel = XMLSerializer.Load(configPath, typeof(ConfigurationModel)) as ConfigurationModel;
+         }
+         catch (Exception e)
+         {
+            //TODO: Log4Net here?
+            Console.WriteLine("LoadFromFile failed: " + e.Message);
+         }
+      }
+
+      /// <summary>
+      /// Save data to given file
+      /// </summary>
+      /// <param name="configPath">Path to configuration file</param>
+      public void SaveToFile(string configPath)
+      {
+         try
+         {
+            XMLSerializer.Save(configPath, Model);
+         }
+         catch (Exception e)
+         {
+            //TODO: Log4Net here?
+            Console.WriteLine("SaveToFile failed: " + e.Message);
+         }
+      }
+      #endregion
+
+      #region Wrapped properties from configruation data
       public bool StartInBigPicture 
       { 
          get
@@ -171,50 +243,18 @@ namespace MPsteam
             }
          }
       }
-      
+      #endregion
+
+      #region IClonable
       public object Clone()
       {
          return new ConfigurationVM(this);
       }
+      #endregion
 
-      public void LoadFromFile(string configPath)
-      {
-         if (File.Exists(configPath))
-         {
-            try
-            {
-               _configurationModel = XMLSerializer.Load(configPath, typeof(ConfigurationModel)) as ConfigurationModel;
-            }
-            catch (Exception e)
-            {
-               //TODO: Log4Net here?
-               Console.WriteLine("LoadFromFile failed: " + e.Message);
-               throw e;
-            }
-         }
-         else
-         {
-            //TODO: Log4Net here?
-            Console.WriteLine("LoadFromFile failed: File does not exist");
-            //TODO: Throwing is okay, but it should be handled above. Exception removed as a quick fix.
-            //throw new FileNotFoundException();
-         }
-      }
-
-      public void SaveToFile(string configPath)
-      {
-         try
-         {
-            XMLSerializer.Save(configPath, Model);
-         }
-         catch (Exception e)
-         {
-            //TODO: Log4Net here?
-            Console.WriteLine("SaveToFile failed: " + e.Message);
-            throw e;
-         }
-      }
-
+      #region private members
+      private String _configurationPath;
       private ConfigurationModel _configurationModel = new ConfigurationModel();   
+      #endregion    
    } 
 }
