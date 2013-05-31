@@ -551,7 +551,7 @@
         <VersionDescription>-Added adjustable delay
 -Added config to installation</VersionDescription>
         <DevelopmentStatus>Alpha</DevelopmentStatus>
-        <OnlineLocation>https://github.com/motey/MPSteam/raw/master/Setup/MPsteam_0.0.2.1.mpe1</OnlineLocation>
+        <OnlineLocation>https://github.com/motey/MPSteam/raw/master/Setup/MPsteam_0.0.2.2.mpe1</OnlineLocation>
         <ReleaseDate>2013-04-02T23:15:38</ReleaseDate>
         <Tags>steam, external app</Tags>
         <Location>C:\Users\tim\Documents\GitHub\MPSteam\Setup\[Name]_[Version].mpe1</Location>
