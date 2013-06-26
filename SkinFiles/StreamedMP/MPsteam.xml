@@ -4,24 +4,57 @@
     <defaultcontrol>2</defaultcontrol>
     <allowoverlay>yes</allowoverlay>
     <controls>
+		<control>
+			<id>0</id>
+			<description>steam overlay image</description>
+			<type>image</type>
+			<posX>0</posX>
+			<posY>0</posY>
+			<width>1920</width>
+			<height>1080</height>
+			<texture>hover_steam.jpg</texture>
+			<animation effect="fade" time="300" start="0">WindowOpen</animation>
+		</control>
+		<control>
+			<id>0</id>
+			<description>steam overlay image</description>
+			<type>image</type>
+			<posX>0</posX>
+			<posY>0</posY>
+			<width>1921</width>
+			<height>1080</height>
+			<texture>mainoverlay.png</texture>
+		</control>
+		<control>
+			<description>Title Background</description>
+			<type>image</type>
+			<id>0</id>
+			<posX>115</posX>
+			<posY>16</posY>
+			<width>505</width>
+			<height>52</height>
+			<texture>tvtitlebg.png</texture>
+		</control>
+		<control>
+			<description>Titelleiste</description>
+			<type>fadelabel</type>
+			<id>0</id>
+			<posX>589</posX>
+			<posY>19</posY>
+			<width>450</width>
+			<font>mediastream12c</font>
+			<label>Steam</label>
+			<align>right</align>
+		</control>
+		<import>common.time.xml</import>
         <control>
-            <id>5</id>
-            <description>an Image</description>
+            <description>steam-logo</description>
             <type>image</type>
-            <posX>75</posX>
-            <posY>370</posY>
-            <texture>MPSteam/Steam-logo.png</texture>
-        </control>
-        <control>
-            <id>1</id>
-            <description>Steam Actions</description>
-            <type>label</type>
-            <posX>206</posX>
-            <posY>60</posY>
-            <font>font16</font>
-            <textcolor>ffffffff</textcolor>
-            <align>RIGHT</align>
-            <label>Valve Steam</label>
+            <posX>150</posX>
+            <posY>508</posY>
+            <width>400</width>
+            <height>400</height>
+            <texture>Steam-logo.png</texture>
         </control>
         <control>
             <id>2</id>
@@ -31,10 +64,12 @@
             <onright>2</onright>
             <onup>2</onup>
             <ondown>3</ondown>
-            <posX>58</posX>
-            <posY>110</posY>
-            <width>311</width>
+            <posX>1135</posX>
+            <posY>553</posY>
+            <width>720</width>
+            <height>100</height>
             <label>Start Steam Again</label>
+            <textalign>CENTER</textalign>
         </control>
         <control>
             <id>3</id>
@@ -44,10 +79,12 @@
             <onright>2</onright>
             <onup>2</onup>
             <ondown>2</ondown>
-            <posX>58</posX>
-            <posY>158</posY>
-            <width>311</width>
-            <label>Set Windows Focus on Steam</label>
+            <posX>1135</posX>
+            <posY>667</posY>
+            <width>720</width>
+            <height>100</height>
+            <label>Set Focus to Steam</label>
+            <textalign>CENTER</textalign>
         </control>
     </controls>
 </window>
