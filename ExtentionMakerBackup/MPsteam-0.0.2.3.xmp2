@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PackageClass xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Version>2.0</Version>
+  <Groups>
+    <Items>
+      <GroupItem Name="Default">
+        <ParentGroup />
+        <DisplayName>Default</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>Default</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\MPsteam\bin\Debug\MPsteam.dll</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{67206865-ae28-48a4-9ab4-f0d0d04ddb6f}-MPsteam.dll</ZipFileName>
+              <DestinationFilename>%Plugins%\Windows\MPsteam.dll</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\MPsteam.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{58db61ac-2a32-459d-9b2b-aa2e0fee7628}-MPsteam.xml</ZipFileName>
+              <DestinationFilename>%Config%\MPsteam.xml</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
+      <GroupItem Name="StreamedMP">
+        <ParentGroup>Skins</ParentGroup>
+        <DisplayName>StreamedMP</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>StreamedMP</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\SkinFiles\StreamedMP\MPsteam.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{26f72077-f54c-40e1-a586-fb351551319d}-MPsteam.xml</ZipFileName>
+              <DestinationFilename>%Config%\skin\StreamedMP\MPsteam.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\SkinFiles\Common\Media\hover_steam.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7717fb53-eb72-4449-8de9-3092a9c990e5}-hover_steam.jpg</ZipFileName>
+              <DestinationFilename>%Config%\skin\StreamedMP\Media\hover_steam.jpg</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\SkinFiles\Common\Media\Steam-logo.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{08a80d1d-dd90-4ffd-a8f2-d3b7c0b595fe}-Steam-logo.png</ZipFileName>
+              <DestinationFilename>%Config%\skin\StreamedMP\Media\Steam-logo.png</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
+      <GroupItem Name="DefaultWide">
+        <ParentGroup>Skins</ParentGroup>
+        <DisplayName>DefaultWide</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>DefaultWide</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\SkinFiles\DefaultWide\MPsteam.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{06649d8c-2626-4327-8fbc-a6e1cdc2a5c2}-MPsteam.xml</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\MPsteam.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\SkinFiles\Common\Media\Steam-logo.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{ef4cfb10-d6fc-4bfb-9c66-16ee815898b5}-Steam-logo.png</ZipFileName>
+              <DestinationFilename>%Skin%\DefaultWide\Media\Steam-logo.png</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
+      <GroupItem Name="Skins">
+        <ParentGroup />
+        <DisplayName>Skins</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>Skins</Description>
+        <Files>
+          <Items />
+        </Files>
+      </GroupItem>
+      <GroupItem Name="Titan">
+        <ParentGroup>Skins</ParentGroup>
+        <DisplayName>Titan</DisplayName>
+        <DefaulChecked>true</DefaulChecked>
+        <Description>Titan</Description>
+        <Files>
+          <Items>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\SkinFiles\Titan\MPsteam.xml</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{7769b649-25d1-44d9-ba11-364fa8c61d2a}-MPsteam.xml</ZipFileName>
+              <DestinationFilename>%Skin%\Titan\MPsteam.xml</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\SkinFiles\Common\Media\Steam-logo.png</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{d40ceb58-acf4-4ac4-9175-c65f661442fa}-Steam-logo.png</ZipFileName>
+              <DestinationFilename>%Skin%\Titan\Media\Steam-logo.png</DestinationFilename>
+            </FileItem>
+            <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+              <Param1 />
+              <UpdateOption>AlwaysOverwrite</UpdateOption>
+              <LocalFileName>..\SkinFiles\Common\Media\hover_steam.jpg</LocalFileName>
+              <ZipFileName>Installer{CopyFile}\{2cbc5a62-159e-4ac0-a44a-97c60dda3369}-hover_steam.jpg</ZipFileName>
+              <DestinationFilename>%Skin%\Titan\Media\hover_steam.jpg</DestinationFilename>
+            </FileItem>
+          </Items>
+        </Files>
+      </GroupItem>
+    </Items>
+  </Groups>
+  <Sections>
+    <Items>
+      <SectionItem Guid="ca75d07a-94e3-46b1-9669-39635690df1c" Name="Welcome Screen" ConditionGroup="Default">
+        <Params>
+          <Items>
+            <SectionParam Name="Header text">
+              <Value>Welcome to the Extension Installer for [Name]</Value>
+              <ValueType>String</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Description">
+              <Value>This will install [Name] version [Version] on your computer.
+It is recommended that you close all other applications before continuing.
+Click Next to continue or Cancel to exit Setup.</Value>
+              <ValueType>String</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Left part image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items />
+        </Actions>
+        <IncludedGroups />
+        <PanelName>Welcome Screen</PanelName>
+        <WizardButtonsEnum>NextCancel</WizardButtonsEnum>
+      </SectionItem>
+      <SectionItem Guid="5b509f12-6770-4304-8e78-5cb12c61a5a8" Name="Tree View Selector" ConditionGroup="">
+        <Params>
+          <Items>
+            <SectionParam Name="Header Title">
+              <Value>Skin Files</Value>
+              <ValueType>String</ValueType>
+              <Description>Header title</Description>
+            </SectionParam>
+            <SectionParam Name="Header description">
+              <Value />
+              <ValueType>String</ValueType>
+              <Description>Description of section, shown in under section title</Description>
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+            <SectionParam Name="Description ">
+              <Value>Choose the Skin(s) you would like to install</Value>
+              <ValueType>String</ValueType>
+              <Description>Description of this operation</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items>
+            <ActionItem Name="ConfigurePlugin" ActionType="ConfigurePlugin" ConditionGroup="Skins">
+              <Params>
+                <Items>
+                  <SectionParam Name="Path to plugin">
+                    <Value />
+                    <ValueType>Template</ValueType>
+                    <Description>Path to the plugin like 
+ %Plugins%\Windows\plugin.dll</Description>
+                  </SectionParam>
+                </Items>
+              </Params>
+              <ExecuteLocation>AfterPanelShow</ExecuteLocation>
+            </ActionItem>
+          </Items>
+        </Actions>
+        <IncludedGroups>
+          <string>StreamedMP</string>
+          <string>Titan</string>
+        </IncludedGroups>
+        <PanelName>Tree View Selector</PanelName>
+        <WizardButtonsEnum>BackNextCancel</WizardButtonsEnum>
+      </SectionItem>
+      <SectionItem Guid="e2c34e12-1c08-4dfc-ae32-f9484b4dce9d" Name="Install Section" ConditionGroup="">
+        <Params>
+          <Items>
+            <SectionParam Name="Header Title">
+              <Value />
+              <ValueType>String</ValueType>
+              <Description>Header title</Description>
+            </SectionParam>
+            <SectionParam Name="Header description">
+              <Value />
+              <ValueType>String</ValueType>
+              <Description>Description of section, shown in under section title</Description>
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items>
+            <ActionItem Name="InstallFiles" ActionType="InstallFiles" ConditionGroup="">
+              <Params>
+                <Items />
+              </Params>
+              <ExecuteLocation>AfterPanelShow</ExecuteLocation>
+            </ActionItem>
+          </Items>
+        </Actions>
+        <IncludedGroups />
+        <PanelName>Install Section</PanelName>
+        <WizardButtonsEnum>Next</WizardButtonsEnum>
+      </SectionItem>
+      <SectionItem Guid="89826e39-ddb7-463b-a832-7d97f609d07f" Name="Setup Complete" ConditionGroup="">
+        <Params>
+          <Items>
+            <SectionParam Name="Header text">
+              <Value>The Extension Installer Wizard has successfully installed [Name].</Value>
+              <ValueType>String</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Left part image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description />
+            </SectionParam>
+            <SectionParam Name="Show radio buttons">
+              <Value />
+              <ValueType>Bool</ValueType>
+              <Description>Use radiobutton in place of combobox</Description>
+            </SectionParam>
+            <SectionParam Name="Header image">
+              <Value />
+              <ValueType>File</ValueType>
+              <Description>Image in upper right part</Description>
+            </SectionParam>
+          </Items>
+        </Params>
+        <Actions>
+          <Items />
+        </Actions>
+        <IncludedGroups />
+        <PanelName>Setup Complete</PanelName>
+        <WizardButtonsEnum>Finish</WizardButtonsEnum>
+      </SectionItem>
+    </Items>
+  </Sections>
+  <Dependencies>
+    <Items>
+      <DependencyItem>
+        <Type>MediaPortal</Type>
+        <Id />
+        <MinVersion>
+          <Major>1</Major>
+          <Minor>1</Minor>
+          <Build>6</Build>
+          <Revision>*</Revision>
+        </MinVersion>
+        <MaxVersion>
+          <Major>1</Major>
+          <Minor>*</Minor>
+          <Build>*</Build>
+          <Revision>*</Revision>
+        </MaxVersion>
+        <WarnOnly>false</WarnOnly>
+        <Message>requires min. MediaPortal version 1.2.3.0</Message>
+        <Name>MediaPortal</Name>
+      </DependencyItem>
+    </Items>
+  </Dependencies>
+  <PluginDependencies>
+    <Items>
+      <PluginDependencyItem AssemblyName="MPsteam.dll">
+        <CompatibleVersion>
+          <Items>
+            <CompatibleVersionItem>
+              <MinRequiredVersion>1.1.6.27644</MinRequiredVersion>
+              <DesignedForVersion>1.3.100.0</DesignedForVersion>
+            </CompatibleVersionItem>
+          </Items>
+        </CompatibleVersion>
+        <SubSystemsUsed>
+          <Items />
+        </SubSystemsUsed>
+      </PluginDependencyItem>
+    </Items>
+  </PluginDependencies>
+  <GeneralInfo>
+    <Name>MPsteam</Name>
+    <Id>e41906ec-f7b0-4c03-ab05-315312b660a1</Id>
+    <Author>Tim Bleimehl, Jens Bühl</Author>
+    <HomePage>https://github.com/motey/MPSteam</HomePage>
+    <ForumPage>http://forum.team-mediaportal.com/threads/mpsteam-starting-valve-steam-in-big-picture-mode.114471/</ForumPage>
+    <UpdateUrl>https://raw.github.com/motey/MPSteam/master/Setup/MPsteam_update.xml</UpdateUrl>
+    <Version>
+      <Major>0</Major>
+      <Minor>0</Minor>
+      <Build>2</Build>
+      <Revision>3</Revision>
+    </Version>
+    <ExtensionDescription>This tiny extention adds an entry for starting Valve Steam in Big Pictre Mode to the menu.</ExtensionDescription>
+    <VersionDescription>-Skinfiles updated for Titan and StreamedMP
+
+-Minor language text changes
+-Removed broken DefaultWide skin file</VersionDescription>
+    <DevelopmentStatus>Alpha</DevelopmentStatus>
+    <OnlineLocation>https://github.com/motey/MPSteam/raw/master/Setup/MPsteam_0.0.2.3.mpe1</OnlineLocation>
+    <ReleaseDate>2013-04-02T23:15:38</ReleaseDate>
+    <Tags>steam, external app</Tags>
+    <Location>..\Setup\[Name]_[Version].mpe1</Location>
+    <Params>
+      <Items>
+        <SectionParam Name="Icon">
+          <Value>..\SkinFiles\Common\Media\Steam-logo.png</Value>
+          <ValueType>File</ValueType>
+          <Description>The icon file of the package (jpg,png,bmp)</Description>
+        </SectionParam>
+        <SectionParam Name="Online Icon">
+          <Value />
+          <ValueType>String</ValueType>
+          <Description>The icon file of the package stored online (jpg,png,bmp)</Description>
+        </SectionParam>
+        <SectionParam Name="Configuration file">
+          <Value>%Plugins%\Windows\MPsteam.dll</Value>
+          <ValueType>Template</ValueType>
+          <Description>The file used to configure the extension.
+ If have .exe extension the will be executed
+ If have .dll extension used like MP plugin configuration</Description>
+        </SectionParam>
+        <SectionParam Name="Online Screenshots">
+          <Value>https://raw.github.com/motey/MPSteam/master/Screenshots/Titan.png</Value>
+          <ValueType>String</ValueType>
+          <Description>Online stored screenshot urls separated by ; </Description>
+        </SectionParam>
+        <SectionParam Name="Force to uninstall on update">
+          <Value>YES</Value>
+          <ValueType>Bool</ValueType>
+          <Description>Show dialog and force to uninstall previous version when updating an extension. Should only be disabled if you are using an NSIS/MSI installer.</Description>
+        </SectionParam>
+      </Items>
+    </Params>
+  </GeneralInfo>
+  <UniqueFileList>
+    <Items>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\MPsteam\bin\Debug\MPsteam.dll</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{67206865-ae28-48a4-9ab4-f0d0d04ddb6f}-MPsteam.dll</ZipFileName>
+        <DestinationFilename>%Plugins%\Windows\MPsteam.dll</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\..\..\..\..\..\ProgramData\Team MediaPortal\MediaPortal\MPsteam.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{58db61ac-2a32-459d-9b2b-aa2e0fee7628}-MPsteam.xml</ZipFileName>
+        <DestinationFilename>%Config%\MPsteam.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\SkinFiles\StreamedMP\MPsteam.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{26f72077-f54c-40e1-a586-fb351551319d}-MPsteam.xml</ZipFileName>
+        <DestinationFilename>%Config%\skin\StreamedMP\MPsteam.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\SkinFiles\Common\Media\hover_steam.jpg</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7717fb53-eb72-4449-8de9-3092a9c990e5}-hover_steam.jpg</ZipFileName>
+        <DestinationFilename>%Config%\skin\StreamedMP\Media\hover_steam.jpg</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="true" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\SkinFiles\Common\Media\Steam-logo.png</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{08a80d1d-dd90-4ffd-a8f2-d3b7c0b595fe}-Steam-logo.png</ZipFileName>
+        <DestinationFilename>%Config%\skin\StreamedMP\Media\Steam-logo.png</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\SkinFiles\DefaultWide\MPsteam.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{06649d8c-2626-4327-8fbc-a6e1cdc2a5c2}-MPsteam.xml</ZipFileName>
+        <DestinationFilename>%Skin%\DefaultWide\MPsteam.xml</DestinationFilename>
+      </FileItem>
+      <FileItem InstallType="CopyFile" SystemFile="false" Modified="true">
+        <Param1 />
+        <UpdateOption>AlwaysOverwrite</UpdateOption>
+        <LocalFileName>..\SkinFiles\Titan\MPsteam.xml</LocalFileName>
+        <ZipFileName>Installer{CopyFile}\{7769b649-25d1-44d9-ba11-364fa8c61d2a}-MPsteam.xml</ZipFileName>
+        <DestinationFilename>%Skin%\Titan\MPsteam.xml</DestinationFilename>
+      </FileItem>
+    </Items>
+  </UniqueFileList>
+  <ProjectSettings>
+    <FolderGroups />
+    <ProjectFilename>MPsteam.xmp2</ProjectFilename>
+    <UpdatePath1>..\Setup\MPsteam_update.xml</UpdatePath1>
+    <UpdatePath2 />
+    <UpdatePath3 />
+  </ProjectSettings>
+  <IsSkin>false</IsSkin>
+</PackageClass>
