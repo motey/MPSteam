@@ -1,4 +1,5 @@
-namespace MPsteam
+using MPsteam.Configuration;
+namespace MPsteam.Steam
 {
    public class SteamFacade
    {
@@ -23,7 +24,7 @@ namespace MPsteam
          _steamStarter.SetFocus();
       }
 
-      private ISteamStarter _steamStarter;
+      private readonly ISteamStarter _steamStarter;
    }
 }
 

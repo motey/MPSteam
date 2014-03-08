@@ -1,32 +1,30 @@
-﻿#region Copyright (C) 2013 MPSteam
+﻿#region Copyright (C) 2014 MPsteam
 
-// Copyright (C) 2013 Tim Bleimehl, Jens Bühl
-// https://github.com/motey/MPSteam
+// Copyright (C) 2014 motey, exe
+// https://github.com/motey/MPsteam
 //
-// MPSteam is free software: you can redistribute it and/or modify
+// MPsteam is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 2 of the License, or
 // (at your option) any later version.
 //
-// MPSteam is distributed in the hope that it will be useful,
+// MPsteam is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with MPSteam. If not, see <http://www.gnu.org/licenses/>.
+// along with MPsteam. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
+using MediaPortal.GUI.Library;
+using MPsteam.Configuration;
+using MPsteam.Helper;
+using MPsteam.Steam;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
-
-using MediaPortal.Common.Utils;
-using MediaPortal.Dialogs;
-using MediaPortal.GUI.Library;
-
 
 
 namespace MPsteam
@@ -49,7 +47,7 @@ namespace MPsteam
       /// <returns>Description string</returns>
       public string Description()
       {
-         return "This plugin provides a menu item to start Steam in Big Picture Mode.";
+         return "MPsteam provides a menu item to start Steam in big picture mode.";
       }
 
       /// <summary>
@@ -58,7 +56,7 @@ namespace MPsteam
       /// <returns>Author string</returns>
       public string Author()
       {
-         return "Tim 'motey' Bleimehl, Jens 'exe' Buehl";
+         return "motey, exe";
       }
 
       /// <summary>
@@ -71,7 +69,7 @@ namespace MPsteam
             _configurationVM.LoadFromFile(_configurationVM.ConfigPath);
 
          //Init dialog with configuration data
-         configWindow wnd = new configWindow(_configurationVM.Clone() as ConfigurationVM);
+         var wnd = new configWindow(_configurationVM.Clone() as ConfigurationVM);
          wnd.ShowDialog();
 
          if (wnd.DialogResult == DialogResult.OK)
@@ -173,13 +171,8 @@ namespace MPsteam
 
       protected override void OnPageLoad()
       {
-         _steamFacade.Start();
-         GUIDialogNotify dlg = (GUIDialogNotify)GUIWindowManager.GetWindow(
-           (int)GUIWindow.Window.WINDOW_DIALOG_NOTIFY);
-         dlg.SetHeading("Info");
-         dlg.SetText("Starting Steam!");
-         dlg.TimeOut = 8;
-         dlg.DoModal(GUIWindowManager.ActiveWindow);
+          MediaPortalAccessor.StopPlayback();
+          _steamFacade.Start();
       }
 
       protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
@@ -195,10 +188,8 @@ namespace MPsteam
 
       #region private members
 
-      [SkinControlAttribute(2)]
-      protected GUIButtonControl _buttonStart = null;
-      [SkinControlAttribute(3)]
-      protected GUIButtonControl _buttonFocus = null; 
+      [SkinControlAttribute(2)] private readonly GUIButtonControl _buttonStart = null;
+      [SkinControlAttribute(3)] private readonly GUIButtonControl _buttonFocus = null; 
 
       private const short _windowID = 8465;
       private SteamFacade _steamFacade;

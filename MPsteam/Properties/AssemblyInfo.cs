@@ -1,25 +1,24 @@
-﻿#region Copyright (C) 2013 MPSteam
+﻿#region Copyright (C) 2014 MPsteam
 
-// Copyright (C) 2013 Tim Bleimehl, Jens Bühl
-// https://github.com/motey/MPSteam
+// Copyright (C) 2014 motey, exe
+// https://github.com/motey/MPsteam
 //
-// MPSteam is free software: you can redistribute it and/or modify
+// MPsteam is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation, either version 2 of the License, or
 // (at your option) any later version.
 //
-// MPSteam is distributed in the hope that it will be useful,
+// MPsteam is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 //
 // You should have received a copy of the GNU General Public License
-// along with MPSteam. If not, see <http://www.gnu.org/licenses/>.
+// along with MPsteam. If not, see <http://www.gnu.org/licenses/>.
 
 #endregion
 
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using MediaPortal.Common.Utils;
 
@@ -31,7 +30,7 @@ using MediaPortal.Common.Utils;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("MPsteam")]
-[assembly: AssemblyCopyright("Copyright ©  2012")]
+[assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -53,6 +52,6 @@ using MediaPortal.Common.Utils;
 // Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.0.2.2")]
-[assembly: AssemblyFileVersion("0.0.2.2")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]
 [assembly: CompatibleVersion("1.3.100.0","1.1.6.27644")]

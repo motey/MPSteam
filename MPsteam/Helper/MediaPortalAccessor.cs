@@ -18,7 +18,10 @@
 
 #endregion
 
+using MediaPortal.GUI.Library;
+using MediaPortal.Player;
 using System.ComponentModel;
+using System.Threading;
 
 namespace MPsteam.Helper
 {
@@ -26,27 +29,18 @@ namespace MPsteam.Helper
    /// A base class implementation of INotifyPropertyChanged, 
    /// derive from this class for databinding objects (ViewModels).
    /// </summary>
-   public abstract class ViewModelBase : INotifyPropertyChanged
+   public static class MediaPortalAccessor
    {
-      /// <summary>
-      /// Raised when a property on this object has a new value.
-      /// </summary>
-      public event PropertyChangedEventHandler PropertyChanged;
-
-      #region INotifyPropertyChanged Members
-
-      /// <summary>
-      /// Raises this object's PropertyChanged event.
-      /// </summary>
-      /// <param name="propertyName">The property that has a new value.</param>
-      protected void OnPropertyChanged(string propertyName)
+      public static void StopPlayback()
       {
-         if (this.PropertyChanged != null)
+         if (GUIGraphicsContext.IsPlaying)
          {
-            this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            g_Player.Stop();
+            while (GUIGraphicsContext.IsPlaying)
+            {
+               Thread.Sleep(100);
+            }
          }
       }
-
-      #endregion // INotifyPropertyChanged Members
    }
 }

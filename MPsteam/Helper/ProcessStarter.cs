@@ -1,24 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Text;
 
-namespace MPsteam
+namespace MPsteam.Helper
 {
-   class ProcessStarter
+   static class ProcessStarter
    {
       public static void Start(string path, string arguments = "")
       {
-         Process proc = new Process();
-         proc.StartInfo.FileName = path;
-         proc.StartInfo.Arguments = arguments;
+         var proc = new Process
+         {
+            StartInfo =
+            {
+               FileName = path, 
+               Arguments = arguments
+            }
+         };
          proc.Start();
       }
 
       public static bool IsRunning(string processName)
       {
-         return Process.GetProcesses().Any(proc => proc.ProcessName.Contains("Steam"));
+         return Process.GetProcesses().Any(proc => proc.ProcessName.Contains(processName));
       }
    }
 }

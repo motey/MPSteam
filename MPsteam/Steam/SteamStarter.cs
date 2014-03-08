@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using MediaPortal.Dialogs;
+﻿using MediaPortal.Dialogs;
 using MediaPortal.GUI.Library;
 using Microsoft.Win32;
+using MPsteam.Configuration;
+using MPsteam.Helper;
+using System;
+using System.Collections.Generic;
+using System.IO;
 
-namespace MPsteam
+namespace MPsteam.Steam
 {
    class SteamStarter : ISteamStarter
    {
@@ -47,13 +46,11 @@ namespace MPsteam
          {
             ProcessStarter.Start(GetSteamPath(), GetProcessArguments());
          }
-         catch (System.Exception ex)
+         catch (Exception)
          {
-            //TODO: Add logging? Add better msg with more information...
-            GUIDialogOK dlg = (GUIDialogOK)GUIWindowManager.GetWindow(
-            (int)GUIWindow.Window.WINDOW_DIALOG_OK);
-            dlg.SetHeading("Steam Not Found");
-            dlg.SetLine(1, "Sorry, can't find your Steam.exe!");
+            var dlg = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
+            dlg.SetHeading("Steam not found");
+            dlg.SetLine(1, "Could not find your steam.exe!");
             dlg.SetLine(2, String.Empty);
             dlg.SetLine(3, String.Empty);
             dlg.DoModal(GUIWindowManager.ActiveWindow);
@@ -83,7 +80,7 @@ namespace MPsteam
       /// <returns>Path to steam executable</returns>
       private string GetSteamPath()
       {
-         string steamPath = "";
+         string steamPath;
 
          //From Config
          if (_configurationVM.OverrideSteamPath)
@@ -113,10 +110,8 @@ namespace MPsteam
          {
             return regKey.GetValue("SteamExe").ToString();
          }
-         else
-         {
-            throw new KeyNotFoundException();
-         } 
+         
+         throw new KeyNotFoundException();
       }
 
       /// <summary>
@@ -138,6 +133,6 @@ namespace MPsteam
          ProcessStarter.Start(path);
       }
 
-      private ConfigurationVM _configurationVM;
+      private readonly ConfigurationVM _configurationVM;
    }
 }
