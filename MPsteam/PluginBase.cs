@@ -18,6 +18,7 @@
 
 #endregion
 
+using MediaPortal.Configuration;
 using MediaPortal.GUI.Library;
 using MPsteam.Configuration;
 using MPsteam.Helper;
@@ -29,6 +30,7 @@ using System.Windows.Forms;
 
 namespace MPsteam
 {
+   [PluginIcons("MPsteam.Resources.MPsteam-icon-small.png", "MPsteam.Resources.MPsteam-icon-faded-small.png")]
    public class PluginBase : GUIWindow, ISetupForm
    {
       #region ISetupForm Members
@@ -47,7 +49,7 @@ namespace MPsteam
       /// <returns>Description string</returns>
       public string Description()
       {
-         return "MPsteam provides a menu item to start Steam in big picture mode.";
+         return "Provides a menu item to start Steam in big picture mode.";
       }
 
       /// <summary>
@@ -164,7 +166,7 @@ namespace MPsteam
             _configurationVM.LoadFromFile(_configurationVM.ConfigPath);
 
          //Init facade with configuration data
-         _steamFacade = new SteamFacade(_configurationVM);
+         _steamStarter = new SteamStarter(_configurationVM);
 
          return Load(GUIGraphicsContext.Skin + @"\MPsteam.xml");
       }
@@ -172,15 +174,15 @@ namespace MPsteam
       protected override void OnPageLoad()
       {
           MediaPortalAccessor.StopPlayback();
-          _steamFacade.Start();
+          _steamStarter.Start();
       }
 
       protected override void OnClicked(int controlId, GUIControl control, MediaPortal.GUI.Library.Action.ActionType actionType)
       {
          if (control == _buttonStart)
-            _steamFacade.Start();
+            _steamStarter.Start();
          else if (control == _buttonFocus)
-            _steamFacade.SetFocus();
+            _steamStarter.SetFocus();
 
          base.OnClicked(controlId, control, actionType);
       }
@@ -192,7 +194,7 @@ namespace MPsteam
       [SkinControlAttribute(3)] private readonly GUIButtonControl _buttonFocus = null; 
 
       private const short _windowID = 8465;
-      private SteamFacade _steamFacade;
+      private ISteamStarter _steamStarter;
       private ConfigurationVM _configurationVM = new ConfigurationVM();
 
       #endregion    

@@ -46,6 +46,9 @@
     <Reference Include="Dialogs">
       <HintPath>..\Import\Dialogs.dll</HintPath>
     </Reference>
+    <Reference Include="MediaPortal.Support">
+      <HintPath>..\Import\MediaPortal.Support.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -56,6 +59,9 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="Utils">
+      <HintPath>..\Import\Utils.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -82,10 +88,12 @@
       <DependentUpon>configWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Steam\SteamFacade.cs" />
-  </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\MPsteam-icon-faded-small.png" />
+    <EmbeddedResource Include="Resources\MPsteam-icon-small.png" />
+    <Content Include="Resources\steam-icon.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
