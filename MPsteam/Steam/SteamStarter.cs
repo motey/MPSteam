@@ -1,6 +1,7 @@
 ﻿using MediaPortal.Dialogs;
 using MediaPortal.GUI.Library;
 using Microsoft.Win32;
+using MPsteam.Common;
 using MPsteam.Configuration;
 using MPsteam.Helper;
 using System;
@@ -9,130 +10,121 @@ using System.IO;
 
 namespace MPsteam.Steam
 {
-   class SteamStarter : ISteamStarter
-   {
-      public SteamStarter(ConfigurationVM configurationVM)
-      {
-         _configurationVM = configurationVM;
-      }
+    class SteamStarter : ISteamStarter
+    {
+        public SteamStarter(ConfigurationVM configurationVM )
+        {
+            _configurationVM = configurationVM;
+            _procLauncher = new ProcessLauncher(GetSteamPath());
+        }
 
-      /// <summary>
-      /// Start steam
-      /// </summary>
-      public void Start()
-      {
-         StartSteam();
-      }
+        /// <summary>
+        /// Start steam
+        /// </summary>
+        public void Start()
+        {
+            MediaPortalHelper.StopPlayback();
+            MediaPortalHelper.Suspend();
+            StartSteam();
+        }
 
-      /// <summary>
-      /// Set Focus to steam
-      /// </summary>
-      public void SetFocus()
-      {
-         FocusChanger.SetFocusTo("Steam");
-      }
+        /// <summary>
+        /// Set Focus to steam
+        /// </summary>
+        public void SetFocus()
+        {
+            FocusChanger.SetFocusTo("Steam");
+        }
 
-      /// <summary>
-      /// Start steam, method does too much at the moment
-      /// </summary>
-      private void StartSteam()
-      {
-         if (_configurationVM.RunPreStartScript)
-         {
-            RunPreStartScript(_configurationVM.PreStartScriptPath, _configurationVM.PreStartScriptDelay);
-         }   
-
-         try
-         {
-            ProcessStarter.Start(GetSteamPath(), GetProcessArguments());
-         }
-         catch (Exception)
-         {
-            var dlg = (GUIDialogOK)GUIWindowManager.GetWindow((int)GUIWindow.Window.WINDOW_DIALOG_OK);
-            dlg.SetHeading("Steam not found");
-            dlg.SetLine(1, "Could not find your steam.exe!");
-            dlg.SetLine(2, String.Empty);
-            dlg.SetLine(3, String.Empty);
-            dlg.DoModal(GUIWindowManager.ActiveWindow);
-         }
-      }
-
-      private string GetProcessArguments()
-      {
-         string arguments = "";
-         if (_configurationVM.StartInBigPicture)
-         {
-            if (ProcessStarter.IsRunning("Steam"))
+        private void StartSteam()
+        {
+            if (_configurationVM.RunPreStartScript)
             {
-               arguments = "steam://open/bigpicture";
+                RunPreStartScript(_configurationVM.PreStartScriptPath, _configurationVM.PreStartScriptDelay);
             }
+
+            try
+            {
+                _procLauncher.AddExitedHandler(new EventHandler((o, e) => { OnExit(); }));
+                _procLauncher.Start(GetProcessArguments());
+            }
+            catch (Exception)
+            {
+                //Logging
+            }
+        }
+
+        private void OnExit()
+        {
+            MediaPortalHelper.Resume();
+        }
+
+        private string GetProcessArguments()
+        {
+            string arguments = "";
+            if (_configurationVM.StartInBigPicture)
+            {
+                if (_procLauncher.IsRunning())
+                {
+                    arguments = "steam://open/bigpicture";
+                }
+                else
+                {
+                    arguments = "-bigpicture";
+                }
+            }
+            return arguments;
+        }
+
+        /// <summary>
+        /// Get path to steam executable
+        /// </summary>
+        /// <returns>Path to steam executable</returns>
+        private string GetSteamPath()
+        {
+            //From Config
+            if (_configurationVM.OverrideSteamPath)
+            {
+                return _configurationVM.SteamPath;
+            }
+            //From Registry
             else
             {
-               arguments = "-bigpicture";
+                return GetSteamPathFromRegistry();
             }
-         }
-         return arguments;
-      }
+        }
 
-      /// <summary>
-      /// Get path to steam executable
-      /// </summary>
-      /// <returns>Path to steam executable</returns>
-      private string GetSteamPath()
-      {
-         string steamPath;
+        private string GetSteamPathFromRegistry()
+        {
+            RegistryKey regKey = Registry.CurrentUser;
+            regKey = regKey.OpenSubKey(@"Software\Valve\Steam");
 
-         //From Config
-         if (_configurationVM.OverrideSteamPath)
-         {
-            steamPath = _configurationVM.SteamPath;
-         }
-         //From Registry
-         else
-         {
-            steamPath = GetSteamPathFromRegistry();        
-         }
+            if (regKey != null)
+            {
+                return regKey.GetValue("SteamExe").ToString();
+            }
 
-         if (!File.Exists(steamPath))
-         {
-            throw new FileNotFoundException();
-         }
+            throw new KeyNotFoundException();
+        }
 
-         return steamPath;
-      }
+        /// <summary>
+        /// Starts a pre start script at given path with given delay in milliseconds
+        /// </summary>
+        /// <param name="path">Path to the executable</param>
+        /// <param name="delay">Delay before executing the script</param>
+        private void RunPreStartScript(string path, int delay)
+        {
+            if (!File.Exists(_configurationVM.PreStartScriptPath))
+            {
+                //Logging
+                throw new FileNotFoundException("Script does not exist");
+            }
 
-      private string GetSteamPathFromRegistry()
-      {
-         RegistryKey regKey = Registry.CurrentUser;
-         regKey = regKey.OpenSubKey(@"Software\Valve\Steam");
+            System.Threading.Thread.Sleep(delay);
+            _procLauncher.Start();
+        }
 
-         if (regKey != null)
-         {
-            return regKey.GetValue("SteamExe").ToString();
-         }
-         
-         throw new KeyNotFoundException();
-      }
-
-      /// <summary>
-      /// Starts a pre start script at given path with given delay in milliseconds
-      /// </summary>
-      /// <param name="path">Path to the executable</param>
-      /// <param name="delay">Delay before executing the script</param>
-      private void RunPreStartScript(string path, int delay)
-      {
-         if (!File.Exists(_configurationVM.PreStartScriptPath))
-         {
-            //Add log entry here?
-            throw new FileNotFoundException("Script does not exist");
-         }       
-
-         //Delay the start, simple way, eventually blocking GUI?
-         System.Threading.Thread.Sleep(delay);
-
-         ProcessStarter.Start(path);
-      }
-
-      private readonly ConfigurationVM _configurationVM;
-   }
+        private readonly ConfigurationVM _configurationVM;
+        private readonly ProcessLauncher _procLauncher;
+    }
 }

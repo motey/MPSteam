@@ -21,12 +21,11 @@
 using MediaPortal.Configuration;
 using MediaPortal.GUI.Library;
 using MPsteam.Configuration;
-using MPsteam.Helper;
+using MPsteam.Common;
 using MPsteam.Steam;
 using System;
 using System.IO;
 using System.Windows.Forms;
-
 
 namespace MPsteam
 {
@@ -165,15 +164,12 @@ namespace MPsteam
          if (File.Exists(_configurationVM.ConfigPath))
             _configurationVM.LoadFromFile(_configurationVM.ConfigPath);
 
-         //Init facade with configuration data
          _steamStarter = new SteamStarter(_configurationVM);
-
          return Load(GUIGraphicsContext.Skin + @"\MPsteam.xml");
       }
 
       protected override void OnPageLoad()
       {
-          MediaPortalAccessor.StopPlayback();
           _steamStarter.Start();
       }
 

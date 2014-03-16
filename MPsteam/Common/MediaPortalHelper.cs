@@ -19,17 +19,17 @@
 #endregion
 
 using MediaPortal.GUI.Library;
+using MediaPortal.InputDevices;
 using MediaPortal.Player;
 using System.ComponentModel;
 using System.Threading;
 
-namespace MPsteam.Helper
+namespace MPsteam.Common
 {
    /// <summary>
-   /// A base class implementation of INotifyPropertyChanged, 
-   /// derive from this class for databinding objects (ViewModels).
+   /// Interactions with mediaportal
    /// </summary>
-   public static class MediaPortalAccessor
+    public static class MediaPortalHelper
    {
       public static void StopPlayback()
       {
@@ -41,6 +41,27 @@ namespace MPsteam.Helper
                Thread.Sleep(100);
             }
          }
+      }
+
+      public static void Suspend()
+      {
+          InputDevices.Stop();
+
+          GUIGraphicsContext.BlankScreen = true;
+          GUIGraphicsContext.form.Hide();
+          GUIGraphicsContext.CurrentState = GUIGraphicsContext.State.SUSPENDING;
+      }
+
+      public static void Resume()
+      {
+          InputDevices.Init();
+
+          GUIGraphicsContext.BlankScreen = false;
+          GUIGraphicsContext.form.Show();
+          GUIGraphicsContext.ResetLastActivity();
+          GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GETFOCUS, 0, 0, 0, 0, 0, null);
+          GUIWindowManager.SendThreadMessage(msg);
+          GUIGraphicsContext.CurrentState = GUIGraphicsContext.State.RUNNING;
       }
    }
 }
