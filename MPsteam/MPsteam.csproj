@@ -69,6 +69,9 @@
     <Reference Include="MediaPortal.Support">
       <HintPath>..\Import\MediaPortal.Support.dll</HintPath>
     </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="RemotePlugins">
@@ -88,8 +91,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\LogLevelProvider.cs" />
+    <Compile Include="Common\LoggerConfigurator.cs" />
     <Compile Include="Common\ProcessLauncher.cs" />
-    <Compile Include="Common\MediaPortalHelper.cs" />
+    <Compile Include="Common\MediaPortalService.cs" />
+    <Compile Include="Configuration\ConfigurationAccessor.cs" />
+    <Compile Include="Configuration\Contract\IConfigurationAccessor.cs" />
     <Compile Include="Steam\Contract\ISteamStarter.cs" />
     <Compile Include="Steam\SteamStarter.cs" />
     <Compile Include="Configuration\View\configWindow.cs">
@@ -102,7 +109,7 @@
     <Compile Include="Common\XMLSerializer.cs" />
     <Compile Include="Configuration\Model\ConfigurationModel.cs" />
     <Compile Include="Common\FocusChanger.cs" />
-    <Compile Include="PluginBase.cs" />
+    <Compile Include="MPsteamPlugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\ViewModel\ConfigurationVM.cs" />
   </ItemGroup>
@@ -111,11 +118,13 @@
       <DependentUpon>configWindow.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Resources\MPsteam-icon-faded-small.png" />
     <EmbeddedResource Include="Resources\MPsteam-icon-small.png" />
     <Content Include="Resources\steam-icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

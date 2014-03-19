@@ -18,115 +18,29 @@
 
 #endregion
 
+using MediaPortal.Configuration;
 using MPsteam.Helper;
 using System;
-using System.IO;
 
 namespace MPsteam.Configuration
 {
-   public class ConfigurationVM : ViewModelBase, ICloneable
+   public class ConfigurationVM : ViewModelBase
    {
       public ConfigurationVM(ConfigurationModel model)
       {
-         //TODO: Kann man den MP Path auch über die MediaPortalAPI direkt abfragen?
-         ConfigPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), @"Team MediaPortal\MediaPortal\MPsteam.xml");
+         _configurationModel = model;
          Title = "MPsteam Configuration";
-         Model = model;
-      }
-
-      public ConfigurationVM() : this (new ConfigurationModel())
-      {
-      }
-
-      /// <summary>
-      /// Copy constructor
-      /// </summary>
-      /// <param name="configToCopy">Configuration that is cloned</param>
-      public ConfigurationVM(ConfigurationVM configToCopy)
-      {
-         Title = configToCopy.Title.Clone() as string;
-         ConfigPath = configToCopy.ConfigPath.Clone() as string;
-         StartInBigPicture = configToCopy.StartInBigPicture;
-         RunPreStartScript = configToCopy.RunPreStartScript;
-         OverrideSteamPath = configToCopy.OverrideSteamPath;
-         SteamPath = configToCopy.SteamPath.Clone() as string;
-         PreStartScriptPath = configToCopy.PreStartScriptPath.Clone() as string;
-         PreStartScriptDelay = configToCopy.PreStartScriptDelay;
-         HomeMenuTitle = configToCopy.HomeMenuTitle.Clone() as string;
       }
 
       #region Additional VM properties and methods
-      /// <summary>
-      /// Title, used for Window title
-      /// </summary>
+      
       public string Title { get; private set; }
 
-      /// <summary>
-      /// Actual data class that is beeing stored
-      /// </summary>
-      public ConfigurationModel Model 
-      { 
-         get 
-         {
-            return _configurationModel; 
-         }
-         private set
-         {
-            _configurationModel = value;
-         }
-      }
-
-      /// <summary>
-      /// Path to the configuration file
-      /// </summary>
-      public string ConfigPath
+      public ConfigurationModel Model
       {
-         get
-         {
-            return _configurationPath;
-         }
-         private set
-         {
-            if (value != null && value != _configurationPath)
-            {
-               _configurationPath = value;
-            }
-         }
+         get { return _configurationModel; }
       }
-
-      /// <summary>
-      /// Load data from given file
-      /// </summary>
-      /// <param name="configPath">Path to configuration file</param>
-      public void LoadFromFile(string configPath)
-      {
-         try
-         {
-            _configurationModel = XMLSerializer.Load(configPath, typeof(ConfigurationModel)) as ConfigurationModel;
-         }
-         catch (Exception e)
-         {
-            //TODO: Log4Net here?
-            Console.WriteLine("LoadFromFile failed: " + e.Message);
-         }
-      }
-
-      /// <summary>
-      /// Save data to given file
-      /// </summary>
-      /// <param name="configPath">Path to configuration file</param>
-      public void SaveToFile(string configPath)
-      {
-         try
-         {
-            XMLSerializer.Save(configPath, Model);
-         }
-         catch (Exception e)
-         {
-            //TODO: Log4Net here?
-            Console.WriteLine("SaveToFile failed: " + e.Message);
-         }
-      }
+      
       #endregion
 
       #region Wrapped properties from configruation data
@@ -210,6 +124,22 @@ namespace MPsteam.Configuration
          }
       }
 
+      public bool SuspendMediaPortal
+      {
+         get
+         {
+            return _configurationModel.SuspendMediaPortal;
+         }
+         set
+         {
+            if (value != _configurationModel.SuspendMediaPortal)
+            {
+               _configurationModel.SuspendMediaPortal = value;
+               OnPropertyChanged("SuspendMediaPortal");
+            }
+         }
+      }
+
       public string SteamPath
       {
          get
@@ -243,16 +173,6 @@ namespace MPsteam.Configuration
       }
       #endregion
 
-      #region IClonable
-      public object Clone()
-      {
-         return new ConfigurationVM(this);
-      }
-      #endregion
-
-      #region private members
-      private String _configurationPath;
-      private ConfigurationModel _configurationModel = new ConfigurationModel();   
-      #endregion    
+      private readonly ConfigurationModel _configurationModel;   
    } 
 }

@@ -29,7 +29,7 @@ namespace MPsteam.Common
    /// <summary>
    /// Interactions with mediaportal
    /// </summary>
-    public static class MediaPortalHelper
+    public static class MediaPortalService
    {
       public static void StopPlayback()
       {
@@ -59,7 +59,7 @@ namespace MPsteam.Common
           GUIGraphicsContext.BlankScreen = false;
           GUIGraphicsContext.form.Show();
           GUIGraphicsContext.ResetLastActivity();
-          GUIMessage msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GETFOCUS, 0, 0, 0, 0, 0, null);
+          var msg = new GUIMessage(GUIMessage.MessageType.GUI_MSG_GETFOCUS, 0, 0, 0, 0, 0, null);
           GUIWindowManager.SendThreadMessage(msg);
           GUIGraphicsContext.CurrentState = GUIGraphicsContext.State.RUNNING;
       }

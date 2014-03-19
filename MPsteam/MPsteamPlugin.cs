@@ -20,18 +20,32 @@
 
 using MediaPortal.Configuration;
 using MediaPortal.GUI.Library;
-using MPsteam.Configuration;
 using MPsteam.Common;
+using MPsteam.Configuration;
 using MPsteam.Steam;
 using System;
-using System.IO;
 using System.Windows.Forms;
+using NLog;
 
 namespace MPsteam
 {
    [PluginIcons("MPsteam.Resources.MPsteam-icon-small.png", "MPsteam.Resources.MPsteam-icon-faded-small.png")]
-   public class PluginBase : GUIWindow, ISetupForm
+   public class MPsteamPlugin : GUIWindow, ISetupForm
    {
+      #region private members
+
+      [SkinControlAttribute(2)]
+      private readonly GUIButtonControl _buttonStart = null;
+      [SkinControlAttribute(3)]
+      private readonly GUIButtonControl _buttonFocus = null;
+
+      private const short PLUGIN_WINDOW_ID = 8465;
+      private ISteamStarter _steamStarter;
+      private IConfigurationAccessor _configAccessor;
+      private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+
+      #endregion 
+
       #region ISetupForm Members
 
       /// <summary>
@@ -65,19 +79,19 @@ namespace MPsteam
       /// </summary>
       public void ShowPlugin()
       {
-         //Only load if configuration exists
-         if (File.Exists(_configurationVM.ConfigPath))
-            _configurationVM.LoadFromFile(_configurationVM.ConfigPath);
+         //Load config file
+         _configAccessor = new ConfigurationAccessor(Config.GetFolder(Config.Dir.Config));
+         _configAccessor.Load();
 
-         //Init dialog with configuration data
-         var wnd = new configWindow(_configurationVM.Clone() as ConfigurationVM);
+         //Init dialog with config data
+         var wnd = new configWindow(new ConfigurationVM(_configAccessor.Model));
          wnd.ShowDialog();
 
          if (wnd.DialogResult == DialogResult.OK)
          {
             //Save changes
-            _configurationVM = wnd.GetResult();
-            _configurationVM.SaveToFile(_configurationVM.ConfigPath);
+            var configurationVM = wnd.GetResult();
+            _configAccessor.Save(configurationVM.Model);
          }
          
       }
@@ -97,7 +111,7 @@ namespace MPsteam
       /// <returns>Unique Window ID</returns>
       public int GetWindowId()
       {
-         return _windowID;
+         return PLUGIN_WINDOW_ID;
       }
 
       /// <summary>
@@ -131,7 +145,7 @@ namespace MPsteam
       /// false : plugin does not need it's own button on home</returns>
       public bool GetHome(out string strButtonText, out string strButtonImage, out string strButtonImageFocus, out string strPictureImage)
       {
-         strButtonText = _configurationVM.HomeMenuTitle;
+         strButtonText = _configAccessor.Model.HomeMenuTitle;
          strButtonImage = String.Empty;
          strButtonImageFocus = String.Empty;
          strPictureImage = String.Empty;
@@ -150,7 +164,7 @@ namespace MPsteam
       {
          get
          {
-            return _windowID;
+            return PLUGIN_WINDOW_ID;
          }
       }
 
@@ -160,12 +174,27 @@ namespace MPsteam
       /// <returns>True if successfull, else false</returns>
       public override bool Init()
       {
-         //Only load if configuration exists
-         if (File.Exists(_configurationVM.ConfigPath))
-            _configurationVM.LoadFromFile(_configurationVM.ConfigPath);
+         Log.Info("MPsteam.PluginBase.Init(). See MPsteam.log for further Details.");
 
-         _steamStarter = new SteamStarter(_configurationVM);
-         return Load(GUIGraphicsContext.Skin + @"\MPsteam.xml");
+         //Setup MPsteam logging
+         const string LogFileName = "MPsteam.log";
+         LoggerConfigurator.Configure(Config.GetFolder(Config.Dir.Log) + LogFileName);
+         _logger.Info("MPsteam.PluginBase.Init(). Logger configured.");
+
+         //Load config file
+         _configAccessor = new ConfigurationAccessor(Config.GetFolder(Config.Dir.Config));
+         _configAccessor.Load();
+         _logger.Info("MPsteam.PluginBase.Init(). Configuration loaded.");
+
+         //Init steam starter
+         _steamStarter = new SteamStarter(_configAccessor.Model);
+         _logger.Info("MPsteam.PluginBase.Init(). Steamstarter initialized.");
+
+         //Load skin
+         var loadedSuccess = Load(GUIGraphicsContext.Skin + @"\MPsteam.xml");
+         _logger.Info("MPsteam.PluginBase.Init(). Skin loaded.");
+
+         return loadedSuccess;
       }
 
       protected override void OnPageLoad()
@@ -182,17 +211,6 @@ namespace MPsteam
 
          base.OnClicked(controlId, control, actionType);
       }
-      #endregion  
-
-      #region private members
-
-      [SkinControlAttribute(2)] private readonly GUIButtonControl _buttonStart = null;
-      [SkinControlAttribute(3)] private readonly GUIButtonControl _buttonFocus = null; 
-
-      private const short _windowID = 8465;
-      private ISteamStarter _steamStarter;
-      private ConfigurationVM _configurationVM = new ConfigurationVM();
-
-      #endregion    
+      #endregion     
    } 
 }

@@ -20,6 +20,7 @@
 
 using System;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
 namespace MPsteam.Helper
@@ -50,16 +51,12 @@ namespace MPsteam.Helper
 
       private static void serializer_UnknownNode (object sender, XmlNodeEventArgs e)
       {
-         //TODO: Log4Net here?
-         Console.WriteLine("Unknown Node:" + e.Name + "\t" + e.Text);
+         throw new SerializationException("Unknown Node:" + e.Name + "\t" + e.Text);
       }
 
       private static void serializer_UnknownAttribute(object sender, XmlAttributeEventArgs e)
       {
-         //TODO: Log4Net here?
-         System.Xml.XmlAttribute attr = e.Attr;
-         Console.WriteLine("Unknown attribute " +
-         attr.Name + "='" + attr.Value + "'");
+         throw new SerializationException("Unknown attribute " + e.Attr.Name + "='" + e.Attr.Value + "'");
       }
    }
 }

@@ -32,6 +32,7 @@ namespace MPsteam.Configuration
          StartInBigPicture = true;
          RunPreStartScript = false;
          OverrideSteamPath = false;
+         SuspendMediaPortal = false;
          SteamPath = String.Empty;
          ScriptPath = String.Empty;
          ScriptDelay = 0;
@@ -42,9 +43,10 @@ namespace MPsteam.Configuration
       public bool StartInBigPicture { get; set; }
       [XmlElementAttribute("ScriptActive")]
       public bool RunPreStartScript { get; set; }
-      public string ScriptPath { get; set; }
-      public int ScriptDelay { get; set; }
+      public bool SuspendMediaPortal { get; set; }
       public bool OverrideSteamPath { get; set; }
+      public int ScriptDelay { get; set; }
+      public string ScriptPath { get; set; }        
       public string SteamPath { get; set; }
       public string HomeMenuTitle { get; set; }
    }

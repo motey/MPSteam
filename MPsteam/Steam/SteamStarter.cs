@@ -1,130 +1,131 @@
-﻿using MediaPortal.Dialogs;
-using MediaPortal.GUI.Library;
+﻿using MediaPortal.GUI.Library;
 using Microsoft.Win32;
 using MPsteam.Common;
 using MPsteam.Configuration;
 using MPsteam.Helper;
-using System;
 using System.Collections.Generic;
 using System.IO;
+using NLog;
 
 namespace MPsteam.Steam
 {
-    class SteamStarter : ISteamStarter
-    {
-        public SteamStarter(ConfigurationVM configurationVM )
-        {
-            _configurationVM = configurationVM;
-            _procLauncher = new ProcessLauncher(GetSteamPath());
-        }
+   class SteamStarter : ISteamStarter
+   {
+      private readonly ConfigurationModel _configuration;
+      private readonly ProcessLauncher _steamLauncher;
+      private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        /// <summary>
-        /// Start steam
-        /// </summary>
-        public void Start()
-        {
-            MediaPortalHelper.StopPlayback();
-            MediaPortalHelper.Suspend();
-            StartSteam();
-        }
+      public SteamStarter(ConfigurationModel configuration)
+      {
+         _configuration = configuration;
+         _steamLauncher = new ProcessLauncher(GetSteamPath());
+      }
 
-        /// <summary>
-        /// Set Focus to steam
-        /// </summary>
-        public void SetFocus()
-        {
-            FocusChanger.SetFocusTo("Steam");
-        }
+      #region ISteamStarter interface
+      /// <summary>
+      /// Start steam
+      /// </summary>
+      public void Start()
+      {
+         MediaPortalService.StopPlayback();
+         StartSteam();
+      }
 
-        private void StartSteam()
-        {
-            if (_configurationVM.RunPreStartScript)
+      /// <summary>
+      /// Set Focus to steam
+      /// </summary>
+      public void SetFocus()
+      {
+         FocusChanger.SetFocusTo("Steam");
+      }
+      #endregion
+
+      private void StartSteam()
+      {
+         if (_configuration.RunPreStartScript)
+         {
+            RunPreStartScript();
+         }
+
+         if (_configuration.SuspendMediaPortal)
+         {
+            SuspendMediaPortal();
+         }
+         _steamLauncher.Start(GetProcessArguments());
+      }
+
+      private void SuspendMediaPortal()
+      {
+         MediaPortalService.Suspend();
+         _steamLauncher.AddExitedHandler((o, e) => ResumeMediaPortal());
+      }
+
+      private void ResumeMediaPortal()
+      {
+         MediaPortalService.Resume();
+      }
+
+      private string GetProcessArguments()
+      {
+         string arguments = "";
+         if (_configuration.StartInBigPicture)
+         {
+            if (_steamLauncher.IsRunning())
             {
-                RunPreStartScript(_configurationVM.PreStartScriptPath, _configurationVM.PreStartScriptDelay);
+               arguments = "steam://open/bigpicture";
             }
-
-            try
-            {
-                _procLauncher.AddExitedHandler(new EventHandler((o, e) => { OnExit(); }));
-                _procLauncher.Start(GetProcessArguments());
-            }
-            catch (Exception)
-            {
-                //Logging
-            }
-        }
-
-        private void OnExit()
-        {
-            MediaPortalHelper.Resume();
-        }
-
-        private string GetProcessArguments()
-        {
-            string arguments = "";
-            if (_configurationVM.StartInBigPicture)
-            {
-                if (_procLauncher.IsRunning())
-                {
-                    arguments = "steam://open/bigpicture";
-                }
-                else
-                {
-                    arguments = "-bigpicture";
-                }
-            }
-            return arguments;
-        }
-
-        /// <summary>
-        /// Get path to steam executable
-        /// </summary>
-        /// <returns>Path to steam executable</returns>
-        private string GetSteamPath()
-        {
-            //From Config
-            if (_configurationVM.OverrideSteamPath)
-            {
-                return _configurationVM.SteamPath;
-            }
-            //From Registry
             else
             {
-                return GetSteamPathFromRegistry();
+               arguments = "-bigpicture";
             }
-        }
+         }
+         return arguments;
+      }
 
-        private string GetSteamPathFromRegistry()
-        {
-            RegistryKey regKey = Registry.CurrentUser;
-            regKey = regKey.OpenSubKey(@"Software\Valve\Steam");
+      private string GetSteamPath()
+      {
+         //From Config
+         if (_configuration.OverrideSteamPath)
+         {
+            return _configuration.SteamPath;
+         }
 
-            if (regKey != null)
-            {
-                return regKey.GetValue("SteamExe").ToString();
-            }
+         //From Registry
+         return GetSteamPathFromRegistry();
+      }
 
-            throw new KeyNotFoundException();
-        }
+      private string GetSteamPathFromRegistry()
+      {
+         var regKey = Registry.CurrentUser;
+         regKey = regKey.OpenSubKey(@"Software\Valve\Steam");
 
-        /// <summary>
-        /// Starts a pre start script at given path with given delay in milliseconds
-        /// </summary>
-        /// <param name="path">Path to the executable</param>
-        /// <param name="delay">Delay before executing the script</param>
-        private void RunPreStartScript(string path, int delay)
-        {
-            if (!File.Exists(_configurationVM.PreStartScriptPath))
-            {
-                //Logging
-                throw new FileNotFoundException("Script does not exist");
-            }
+         if (regKey != null)
+         {
+            return regKey.GetValue("SteamExe").ToString();
+         }
 
-            System.Threading.Thread.Sleep(delay);
-            _procLauncher.Start();
-        }
+         const string errrorMessage = "Steam registry key not found";
+         _logger.Error(errrorMessage);
+         Log.Error(errrorMessage);
+         throw new KeyNotFoundException(errrorMessage);
+      }
 
-        private readonly ConfigurationVM _configurationVM;
-        private readonly ProcessLauncher _procLauncher;
-    }
+      private void RunPreStartScript()
+      {
+         if (!File.Exists(_configuration.ScriptPath))
+         {
+            var errrorMessage = _configuration.ScriptPath;
+            _logger.Error(errrorMessage);
+            Log.Error(errrorMessage);
+            throw new FileNotFoundException(errrorMessage);
+         }
+
+         var sciptPath = _configuration.ScriptPath;
+         var scriptLauncher = new ProcessLauncher(sciptPath);
+         var delay = _configuration.ScriptDelay;
+
+         System.Threading.Thread.Sleep(delay);
+         scriptLauncher.Start();
+      }
+   }
 }
