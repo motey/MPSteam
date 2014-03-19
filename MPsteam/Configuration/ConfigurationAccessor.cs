@@ -22,15 +22,13 @@ using System.IO;
 using MediaPortal.GUI.Library;
 using MPsteam.Helper;
 using System;
-using NLog;
 
 namespace MPsteam.Configuration
 {
    public class ConfigurationAccessor : IConfigurationAccessor
    {
-      private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
       private readonly String _configurationPath;
-      private ConfigurationModel _configurationModel;
+      private ConfigurationModel _configurationModel = new ConfigurationModel();
 
       public ConfigurationAccessor(string configurationPath)
       {
@@ -41,13 +39,6 @@ namespace MPsteam.Configuration
       {
          get
          {
-            if (null == _configurationModel)
-            {
-               var errrorMessage = "Configration model not initialized.";
-               _logger.Error(errrorMessage);
-               Log.Error(errrorMessage);
-               throw new NullReferenceException(errrorMessage);
-            }
             return _configurationModel;
          }
       }
@@ -56,10 +47,7 @@ namespace MPsteam.Configuration
       {
          if (!File.Exists(_configurationPath))
          {
-            var errrorMessage = _configurationPath + "not found";
-            _logger.Error(errrorMessage);
-            Log.Error(errrorMessage);
-            throw new FileNotFoundException(errrorMessage);
+             CreateNewConfigurationFile();
          }
          try
          {
@@ -67,7 +55,6 @@ namespace MPsteam.Configuration
          }
          catch (Exception e)
          {
-            _logger.ErrorException("Could not load configuration", e);
             Log.Error(e);
          }
       }
@@ -80,9 +67,13 @@ namespace MPsteam.Configuration
          }
          catch (Exception e)
          {
-            _logger.ErrorException("Could not save configuration", e);
             Log.Error(e);
          }
+      }
+
+      private void CreateNewConfigurationFile()
+      {
+          Save(_configurationModel);
       }
    } 
 }

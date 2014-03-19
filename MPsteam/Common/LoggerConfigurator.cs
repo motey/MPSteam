@@ -18,6 +18,7 @@
 
 #endregion
 
+/*
 using System.IO;
 using NLog;
 using NLog.Config;
@@ -72,4 +73,4 @@ namespace MPsteam.Common
          }
       }
    }
-}
+}*/

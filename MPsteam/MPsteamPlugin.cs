@@ -25,7 +25,6 @@ using MPsteam.Configuration;
 using MPsteam.Steam;
 using System;
 using System.Windows.Forms;
-using NLog;
 
 namespace MPsteam
 {
@@ -41,8 +40,7 @@ namespace MPsteam
 
       private const short PLUGIN_WINDOW_ID = 8465;
       private ISteamStarter _steamStarter;
-      private IConfigurationAccessor _configAccessor;
-      private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
+      private IConfigurationAccessor _configAccessor = new ConfigurationAccessor(Config.GetFolder(Config.Dir.Config) + @"\MPsteam.xml");
 
       #endregion 
 
@@ -80,7 +78,6 @@ namespace MPsteam
       public void ShowPlugin()
       {
          //Load config file
-         _configAccessor = new ConfigurationAccessor(Config.GetFolder(Config.Dir.Config));
          _configAccessor.Load();
 
          //Init dialog with config data
@@ -177,22 +174,17 @@ namespace MPsteam
          Log.Info("MPsteam.PluginBase.Init(). See MPsteam.log for further Details.");
 
          //Setup MPsteam logging
-         const string LogFileName = "MPsteam.log";
-         LoggerConfigurator.Configure(Config.GetFolder(Config.Dir.Log) + LogFileName);
-         _logger.Info("MPsteam.PluginBase.Init(). Logger configured.");
+         //const string LogFileName = "MPsteam.log";
+         //LoggerConfigurator.Configure(Config.GetFolder(Config.Dir.Log) + LogFileName);
 
          //Load config file
-         _configAccessor = new ConfigurationAccessor(Config.GetFolder(Config.Dir.Config));
          _configAccessor.Load();
-         _logger.Info("MPsteam.PluginBase.Init(). Configuration loaded.");
 
          //Init steam starter
          _steamStarter = new SteamStarter(_configAccessor.Model);
-         _logger.Info("MPsteam.PluginBase.Init(). Steamstarter initialized.");
 
          //Load skin
          var loadedSuccess = Load(GUIGraphicsContext.Skin + @"\MPsteam.xml");
-         _logger.Info("MPsteam.PluginBase.Init(). Skin loaded.");
 
          return loadedSuccess;
       }

@@ -5,7 +5,6 @@ using MPsteam.Configuration;
 using MPsteam.Helper;
 using System.Collections.Generic;
 using System.IO;
-using NLog;
 
 namespace MPsteam.Steam
 {
@@ -13,7 +12,6 @@ namespace MPsteam.Steam
    {
       private readonly ConfigurationModel _configuration;
       private readonly ProcessLauncher _steamLauncher;
-      private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
       public SteamStarter(ConfigurationModel configuration)
       {
@@ -105,7 +103,6 @@ namespace MPsteam.Steam
          }
 
          const string errrorMessage = "Steam registry key not found";
-         _logger.Error(errrorMessage);
          Log.Error(errrorMessage);
          throw new KeyNotFoundException(errrorMessage);
       }
@@ -115,7 +112,6 @@ namespace MPsteam.Steam
          if (!File.Exists(_configuration.ScriptPath))
          {
             var errrorMessage = _configuration.ScriptPath;
-            _logger.Error(errrorMessage);
             Log.Error(errrorMessage);
             throw new FileNotFoundException(errrorMessage);
          }
