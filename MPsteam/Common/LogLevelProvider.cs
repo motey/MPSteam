@@ -18,9 +18,10 @@
 
 #endregion
 
-/*
+
 using MediaPortal.Configuration;
 using MediaPortal.Services;
+using NLog;
 
 namespace MPsteam.Common
 {
@@ -58,4 +59,3 @@ namespace MPsteam.Common
        }
    }
 }
- */

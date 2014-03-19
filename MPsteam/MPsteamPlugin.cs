@@ -23,6 +23,7 @@ using MediaPortal.GUI.Library;
 using MPsteam.Common;
 using MPsteam.Configuration;
 using MPsteam.Steam;
+using NLog;
 using System;
 using System.Windows.Forms;
 
@@ -39,6 +40,7 @@ namespace MPsteam
       private readonly GUIButtonControl _buttonFocus = null;
 
       private const short PLUGIN_WINDOW_ID = 8465;
+      //private static Logger _logger = LogManager.GetCurrentClassLogger();
       private ISteamStarter _steamStarter;
       private IConfigurationAccessor _configAccessor = new ConfigurationAccessor(Config.GetFolder(Config.Dir.Config) + @"\MPsteam.xml");
 
@@ -171,11 +173,11 @@ namespace MPsteam
       /// <returns>True if successfull, else false</returns>
       public override bool Init()
       {
-         Log.Info("MPsteam.PluginBase.Init(). See MPsteam.log for further Details.");
+         Log.Info("MPsteam.PluginBase.Init()");
 
          //Setup MPsteam logging
          //const string LogFileName = "MPsteam.log";
-         //LoggerConfigurator.Configure(Config.GetFolder(Config.Dir.Log) + LogFileName);
+         //LoggerConfigurator.Configure(Config.GetFolder(Config.Dir.Log) + "\\" + LogFileName);
 
          //Load config file
          _configAccessor.Load();
