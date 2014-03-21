@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MPsteam</RootNamespace>
     <AssemblyName>MPsteam</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -38,37 +38,45 @@
     <ApplicationIcon>
     </ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Common.Utils">
-      <HintPath>..\Import\Common.Utils.dll</HintPath>
+      <HintPath>..\Import\MediaProtal\Common.Utils.dll</HintPath>
     </Reference>
     <Reference Include="Core">
-      <HintPath>..\Import\Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Dialogs">
-      <HintPath>..\Import\Dialogs.dll</HintPath>
-    </Reference>
-    <Reference Include="MediaPortal.Support">
-      <HintPath>..\Import\MediaPortal.Support.dll</HintPath>
+      <HintPath>..\Import\MediaProtal\Core.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
-      <HintPath>..\packages\NLog.2.1.0\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\Import\NLog.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
     <Reference Include="RemotePlugins">
-      <HintPath>..\Import\RemotePlugins.dll</HintPath>
+      <HintPath>..\Import\MediaProtal\RemotePlugins.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="Utils">
-      <HintPath>..\Import\Utils.dll</HintPath>
+      <HintPath>..\Import\MediaProtal\Utils.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -104,9 +112,6 @@
     <EmbeddedResource Include="Resources\MPsteam-icon-faded-small.png" />
     <EmbeddedResource Include="Resources\MPsteam-icon-small.png" />
     <Content Include="Resources\steam-icon.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

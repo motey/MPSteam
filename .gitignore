@@ -2,5 +2,9 @@ bin
 obj
 lib
 suo
+user
 debug
 release
+x86
+x64
+TestResults

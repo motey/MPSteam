@@ -1,9 +1,8 @@
-MPSteam
+MPsteam
 =======
-Tiny plugin for MediaPortal for starting Valves Steam from Homemenu
+Plugin for MediaPortal that allows starting "Valve Steam" from the MediaPortal home menu.
 
 Development
 ===========
 - Clone repository
-- Load included VisualStudio solution file
-...and have fun
+- Load included Visual Studio solution

@@ -18,7 +18,6 @@
 
 #endregion
 
-
 using MediaPortal.Configuration;
 using MediaPortal.Services;
 using NLog;
@@ -34,28 +33,29 @@ namespace MPsteam.Common
       /// Get current log level from MediaPortal
       /// </summary>
       /// <returns>NLog loglevel</returns>
-       public static LogLevel GetLogLevel()
-       {
-          LogLevel logLevel;
-          var xmlreader = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml"));
+      public static LogLevel GetLogLevel()
+      {
+         LogLevel logLevel;
+         var settingsMP = new MediaPortal.Profile.Settings(Config.GetFile(Config.Dir.Config, "MediaPortal.xml"));
+         var logLevelMP = settingsMP.GetValueAsInt("general", "loglevel", 0);
 
-          switch ((Level)xmlreader.GetValueAsInt("general", "loglevel", 0))
-          {
-             case Level.Error:
-                logLevel = LogLevel.Error;
-                break;
-             case Level.Warning:
-                logLevel = LogLevel.Warn;
-                break;
-             case Level.Information:
-                logLevel = LogLevel.Info;
-                break;
-             default:
-                logLevel = LogLevel.Debug;
-                break;
-          }
+         switch ((Level)logLevelMP)
+         {
+            case Level.Error:
+               logLevel = LogLevel.Error;
+               break;
+            case Level.Warning:
+               logLevel = LogLevel.Warn;
+               break;
+            case Level.Information:
+               logLevel = LogLevel.Info;
+               break;
+            default:
+               logLevel = LogLevel.Debug;
+               break;
+         }
 
-          return logLevel;
-       }
+         return logLevel;
+      }
    }
 }

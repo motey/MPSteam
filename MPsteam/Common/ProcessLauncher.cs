@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 
-namespace MPsteam.Helper
+namespace MPsteam.Common
 {
     public class ProcessLauncher
     {

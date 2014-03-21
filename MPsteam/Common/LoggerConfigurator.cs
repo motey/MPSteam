@@ -43,7 +43,7 @@ namespace MPsteam.Common
 
          var fileTarget = CreateFileTarget(logFileName);
          var logLevel = LogLevelProvider.GetLogLevel();
-         var rule = new LoggingRule("MyFilms*", logLevel, fileTarget); // only push logging from namespace "MPsteam*" to log file
+         var rule = new LoggingRule("MPsteam*", logLevel, fileTarget); // only push logging from namespace "MPsteam*" to log file
          
          config.AddTarget("file", fileTarget);
          config.LoggingRules.Add(rule);

@@ -34,17 +34,31 @@ namespace MPsteam
    {
       #region private members
 
+      //MP GUI
+      private const short PLUGIN_WINDOW_ID = 8465;
       [SkinControlAttribute(2)]
       private readonly GUIButtonControl _buttonStart = null;
       [SkinControlAttribute(3)]
       private readonly GUIButtonControl _buttonFocus = null;
 
-      private const short PLUGIN_WINDOW_ID = 8465;
-      //private static Logger _logger = LogManager.GetCurrentClassLogger();
+      //Services
       private ISteamStarter _steamStarter;
-      private IConfigurationAccessor _configAccessor = new ConfigurationAccessor(Config.GetFolder(Config.Dir.Config) + @"\MPsteam.xml");
+      private IConfigurationAccessor _configAccessor;
 
-      #endregion 
+      //Paths
+      private string _configFilePath;
+      private string _logFilePath;
+      private string _skinFilePath;
+
+      //NLog logger
+      private static Logger _log = LogManager.GetCurrentClassLogger();
+
+      #endregion
+
+      public MPsteamPlugin()
+      {
+         InitMPsteam();
+      }
 
       #region ISetupForm Members
 
@@ -174,21 +188,14 @@ namespace MPsteam
       public override bool Init()
       {
          Log.Info("MPsteam.PluginBase.Init()");
-
-         //Setup MPsteam logging
-         //const string LogFileName = "MPsteam.log";
-         //LoggerConfigurator.Configure(Config.GetFolder(Config.Dir.Log) + "\\" + LogFileName);
-
-         //Load config file
-         _configAccessor.Load();
+         _log.Info("MPsteam.PluginBase.Init()");
 
          //Init steam starter
          _steamStarter = new SteamStarter(_configAccessor.Model);
 
          //Load skin
-         var loadedSuccess = Load(GUIGraphicsContext.Skin + @"\MPsteam.xml");
-
-         return loadedSuccess;
+         _skinFilePath = GUIGraphicsContext.Skin + @"\MPsteam.xml";
+         return Load(_skinFilePath);
       }
 
       protected override void OnPageLoad()
@@ -205,6 +212,23 @@ namespace MPsteam
 
          base.OnClicked(controlId, control, actionType);
       }
-      #endregion     
+      #endregion
+
+      private void InitMPsteam()
+      {
+         //Init paths
+         _configFilePath = Config.GetFolder(Config.Dir.Config) + @"\MPsteam.xml";
+         _logFilePath = Config.GetFolder(Config.Dir.Log) + @"\MPsteam.log";
+
+         //Init configuration
+         _configAccessor = new ConfigurationAccessor(_configFilePath);
+         _configAccessor.Load();
+
+         //Init logger
+         LoggerConfigurator.Configure(_logFilePath);
+
+         Log.Info("MPsteam initialized");
+         _log.Info("MPsteam initialized");
+      }
    } 
 }

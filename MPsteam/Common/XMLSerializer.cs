@@ -23,7 +23,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-namespace MPsteam.Helper
+namespace MPsteam.Common
 {
    public static class XMLSerializer
    {

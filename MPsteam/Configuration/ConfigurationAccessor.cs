@@ -20,7 +20,7 @@
 
 using System.IO;
 using MediaPortal.GUI.Library;
-using MPsteam.Helper;
+using MPsteam.Common;
 using System;
 
 namespace MPsteam.Configuration
@@ -28,11 +28,14 @@ namespace MPsteam.Configuration
    public class ConfigurationAccessor : IConfigurationAccessor
    {
       private readonly String _configurationPath;
-      private ConfigurationModel _configurationModel = new ConfigurationModel();
+      private ConfigurationModel _configurationModel;
 
       public ConfigurationAccessor(string configurationPath)
       {
          _configurationPath = configurationPath;
+         _configurationModel = new ConfigurationModel();
+
+         CreateNewConfigurationFile();
       }
 
       public ConfigurationModel Model
@@ -45,10 +48,6 @@ namespace MPsteam.Configuration
 
       public void Load()
       {
-         if (!File.Exists(_configurationPath))
-         {
-             CreateNewConfigurationFile();
-         }
          try
          {
             _configurationModel = XMLSerializer.Load(_configurationPath, typeof(ConfigurationModel)) as ConfigurationModel;
@@ -64,6 +63,7 @@ namespace MPsteam.Configuration
          try
          {
             XMLSerializer.Save(_configurationPath, model);
+            _configurationModel = model;
          }
          catch (Exception e)
          {
@@ -73,7 +73,10 @@ namespace MPsteam.Configuration
 
       private void CreateNewConfigurationFile()
       {
-          Save(_configurationModel);
+         if (!File.Exists(_configurationPath))
+         {
+            Save(_configurationModel);
+         }
       }
    } 
 }

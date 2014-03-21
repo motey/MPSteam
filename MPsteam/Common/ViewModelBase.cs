@@ -20,7 +20,7 @@
 
 using System.ComponentModel;
 
-namespace MPsteam.Helper
+namespace MPsteam.Common
 {
    /// <summary>
    /// A base class implementation of INotifyPropertyChanged, 

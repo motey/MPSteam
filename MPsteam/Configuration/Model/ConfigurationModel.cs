@@ -36,12 +36,10 @@ namespace MPsteam.Configuration
          SteamPath = String.Empty;
          ScriptPath = String.Empty;
          ScriptDelay = 0;
-         HomeMenuTitle = "Start Steam";
+         HomeMenuTitle = "Steam";
       }
 
-      [XmlElementAttribute("BigPictureMode")]
       public bool StartInBigPicture { get; set; }
-      [XmlElementAttribute("ScriptActive")]
       public bool RunPreStartScript { get; set; }
       public bool SuspendMediaPortal { get; set; }
       public bool OverrideSteamPath { get; set; }

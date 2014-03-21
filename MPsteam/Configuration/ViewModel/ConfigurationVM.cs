@@ -19,7 +19,7 @@
 #endregion
 
 using MediaPortal.Configuration;
-using MPsteam.Helper;
+using MPsteam.Common;
 using System;
 
 namespace MPsteam.Configuration
