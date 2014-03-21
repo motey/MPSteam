@@ -63,8 +63,8 @@
     <Reference Include="Core">
       <HintPath>..\Import\MediaProtal\Core.dll</HintPath>
     </Reference>
-    <Reference Include="NLog">
-      <HintPath>..\Import\NLog.dll</HintPath>
+    <Reference Include="NLog-v2.1">
+      <HintPath>..\Import\NLog-v2.1.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="RemotePlugins">

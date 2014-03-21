@@ -23,7 +23,7 @@ using MediaPortal.GUI.Library;
 using MPsteam.Common;
 using MPsteam.Configuration;
 using MPsteam.Steam;
-using NLog;
+//using NLog;
 using System;
 using System.Windows.Forms;
 
@@ -51,7 +51,7 @@ namespace MPsteam
       private string _skinFilePath;
 
       //NLog logger
-      private static Logger _log = LogManager.GetCurrentClassLogger();
+      //private static Logger _log = LogManager.GetCurrentClassLogger();
 
       #endregion
 
@@ -188,7 +188,7 @@ namespace MPsteam
       public override bool Init()
       {
          Log.Info("MPsteam.PluginBase.Init()");
-         _log.Info("MPsteam.PluginBase.Init()");
+         //_log.Info("MPsteam.PluginBase.Init()");
 
          //Init steam starter
          _steamStarter = new SteamStarter(_configAccessor.Model);
@@ -225,10 +225,10 @@ namespace MPsteam
          _configAccessor.Load();
 
          //Init logger
-         LoggerConfigurator.Configure(_logFilePath);
+         //LoggerConfigurator.Configure(_logFilePath);
 
          Log.Info("MPsteam initialized");
-         _log.Info("MPsteam initialized");
+         //_log.Info("MPsteam initialized");
       }
    } 
 }
